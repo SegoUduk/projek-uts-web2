@@ -1,0 +1,67 @@
+/* src/Register.css */
+
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: left;
+  margin-top: 200px;
+}
+
+.auth-container h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Kontainer tombol untuk membuat tombol "Daftar" dan "Kembali ke Login" sejajar */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.register-button, .back-to-login-button {
+  width: 48%;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Tombol Daftar */
+.register-button {
+  background-color: #ffcc00;
+  color: #333;
+}
+
+.register-button:hover {
+  background-color: #e6b800;
+}
+
+/* Tombol Kembali ke Halaman Login */
+.back-to-login-button {
+  background-color: #ffcc00;
+  color: #333;
+}
+
+.back-to-login-button:hover {
+  background-color: #e6b800;
+}
