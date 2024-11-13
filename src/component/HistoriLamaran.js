@@ -30,7 +30,7 @@ function HistoriLamaran() {
   const applications = [
     {
       jobTitle: "HRD",
-      company: "PT Mencari Cinta Sejatisss",
+      company: "PT Mencari Cinta Sejati",
       date: "12 November 2024",
       status: "Diterima",
     },
