@@ -9,7 +9,7 @@ function Navbar() {
       <div className="nav-links">
         <a href="/Home" className="nav-link">Beranda</a>
         <a href="/jobsearch" className="nav-link active">Cari Lowongan Kerja</a>
-        <a href="#" className="nav-link">Upload Lowongan Kerja</a>
+        <a href="/uploadjob" className="nav-link">Upload Lowongan Kerja</a>
       </div>
       <button className="profile-button">Profil</button>
     </div>
@@ -38,11 +38,7 @@ function JobCard({ job, onClick }) {
 
 function JobDetail({ job }) {
   if (!job) {
-    return (
-      <div className="job-detail-placeholder">
-        Anda Belum Memilih Lowongan Pekerjaan
-      </div>
-    );
+    return <div className="job-detail-placeholder">Anda Belum Memilih Lowongan Pekerjaan</div>;
   }
 
   return (
@@ -60,14 +56,17 @@ function JobDetail({ job }) {
         ))}
       </ul>
       <button className="apply-button" onClick={() => window.location.href = '/FormApplication'}>
-  Lamar Pekerjaan
-</button>
+        Lamar Pekerjaan
+      </button>
     </div>
   );
 }
 
 function JobSearch() {
   const [selectedJob, setSelectedJob] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedJobType, setSelectedJobType] = useState("");
+  const [selectedWorkSystem, setSelectedWorkSystem] = useState("");
 
   const jobs = [
     {
@@ -76,38 +75,9 @@ function JobSearch() {
       salary: "Rp. 3-4 Juta",
       type: "Full Time",
       companyProfile: "PT Mencari Cinta Sejati",
-      qualifications: [
-        "max 25 tahun",
-        "Pendidikan minimal SMK",
-        "wajib memiliki motor dan SIM C",
-        "Pengalaman dan non pengalaman silahkan melamar",
-        "diutamakan domisili Kelapa Gading",
-      ],
+      qualifications: ["max 25 tahun", "Pendidikan minimal SMK", "wajib memiliki motor dan SIM C", "Pengalaman dan non pengalaman silahkan melamar", "diutamakan domisili Kelapa Gading"],
     },
-    {
-      title: "OB",
-      company: "PT Mencari Cinta Sejati",
-      salary: "Rp. 2-3 Juta",
-      type: "Part Time",
-      companyProfile: "PT Mencari Cinta Sejati",
-      qualifications: [
-        "min 18 tahun",
-        "Pendidikan minimal SMA",
-        "Tidak diperlukan pengalaman",
-      ],
-    },
-    {
-      title: "Staf IT",
-      company: "PT Mencari Cinta Sejati",
-      salary: "Rp. 4-6 Juta",
-      type: "Full Time",
-      companyProfile: "PT Mencari Cinta Sejati",
-      qualifications: [
-        "Pendidikan minimal D3/S1 Informatika",
-        "Pengalaman di bidang IT minimal 1 tahun",
-        "Menguasai pemrograman dasar",
-      ],
-    },
+    // Add more jobs as needed...
   ];
 
   return (
@@ -115,26 +85,35 @@ function JobSearch() {
       <Navbar />
 
       <div className="job-search-content">
-        <img
-          src="https://via.placeholder.com/1500x200"
-          alt="Ilustrasi"
-          className="illustration-image"
-        />
+        <img src="https://via.placeholder.com/1500x200" alt="Ilustrasi" className="illustration-image" />
         <h2 className="search-title">Cari Lowongan Kerja</h2>
         <div className="search-container">
           <input type="text" placeholder="Masukkan Kata Kunci" className="search-input" />
           <button className="search-button">
-            <img
-              src="https://via.placeholder.com/20"
-              alt="Cari"
-              className="search-icon"
-            />
+            <img src="https://via.placeholder.com/20" alt="Cari" className="search-icon" />
           </button>
         </div>
-        <div className="filter-buttons">
-          <button className="filter-button">Lokasi</button>
-          <button className="filter-button">Pekerjaan</button>
-          <button className="filter-button">Sistem Kerja</button>
+
+        <div className="filter-options">
+          <div className="filter-group">
+            <label>Lokasi:</label>
+            <label><input type="radio" value="Jakarta" checked={selectedLocation === "Jakarta"} onChange={() => setSelectedLocation("Jakarta")} /> Jakarta</label>
+            <label><input type="radio" value="Bandung" checked={selectedLocation === "Bandung"} onChange={() => setSelectedLocation("Bandung")} /> Bandung</label>
+            <label><input type="radio" value="Surabaya" checked={selectedLocation === "Surabaya"} onChange={() => setSelectedLocation("Surabaya")} /> Surabaya</label>
+          </div>
+
+          <div className="filter-group">
+            <label>Pekerjaan:</label>
+            <label><input type="radio" value="HRD" checked={selectedJobType === "HRD"} onChange={() => setSelectedJobType("HRD")} /> HRD</label>
+            <label><input type="radio" value="IT" checked={selectedJobType === "IT"} onChange={() => setSelectedJobType("IT")} /> IT</label>
+            <label><input type="radio" value="Marketing" checked={selectedJobType === "Marketing"} onChange={() => setSelectedJobType("Marketing")} /> Marketing</label>
+          </div>
+
+          <div className="filter-group">
+            <label>Sistem Kerja:</label>
+            <label><input type="radio" value="Full Time" checked={selectedWorkSystem === "Full Time"} onChange={() => setSelectedWorkSystem("Full Time")} /> Full Time</label>
+            <label><input type="radio" value="Part Time" checked={selectedWorkSystem === "Part Time"} onChange={() => setSelectedWorkSystem("Part Time")} /> Part Time</label>
+          </div>
         </div>
 
         <div className="job-search-container">

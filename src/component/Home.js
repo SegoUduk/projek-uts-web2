@@ -10,7 +10,7 @@ function Navbar() {
       <div className="nav-links">
       <Link to="/home" className="nav-link">Beranda</Link>
         <Link to="/JobSearch" className="nav-link">Cari Lowongan Kerja</Link>
-        <Link to="#" className="nav-link">Unggah Lowongan Kerja</Link>
+        <Link to="/UploadJob" className="nav-link">Unggah Lowongan Kerja</Link>
       </div>
       <button className="profile-button">Profil</button>
     </div>
