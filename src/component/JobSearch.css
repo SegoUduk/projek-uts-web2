@@ -1,4 +1,47 @@
-/* src/JobSearch.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #ffd700;
+}
+
+.profile-button {
+  background-color: #ffd700;
+  padding: 8px 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #333;
+  color: #fff;
+}
 
 .job-search-content {
   padding: 20px;
@@ -61,15 +104,12 @@
 
 .filter-group label {
   font-size: 14px;
-  cursor: pointer;
 }
 
-.filter-button {
-  padding: 8px 16px;
-  border: 1px solid #ddd;
+.filter-group select {
+  padding: 8px;
   border-radius: 8px;
-  background-color: white;
-  cursor: pointer;
+  border: 1px solid #ddd;
 }
 
 .job-search-container {
@@ -133,9 +173,6 @@
   font-size: 16px;
   border-radius: 8px;
   cursor: pointer;
-  top: 123%;
-  left: 80%;
-  position: relative;
 }
 
 .job-detail-placeholder {

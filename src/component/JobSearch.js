@@ -1,4 +1,3 @@
-// src/JobSearch.js
 import React, { useState } from 'react';
 import './JobSearch.css';
 
@@ -11,7 +10,7 @@ function Navbar() {
         <a href="/jobsearch" className="nav-link active">Cari Lowongan Kerja</a>
         <a href="/uploadjob" className="nav-link">Upload Lowongan Kerja</a>
       </div>
-      <button className="profile-button">Profil</button>
+      <a href="/Profil" className="profile-button">Profil</a>
     </div>
   );
 }
@@ -77,7 +76,7 @@ function JobSearch() {
       companyProfile: "PT Mencari Cinta Sejati",
       qualifications: ["max 25 tahun", "Pendidikan minimal SMK", "wajib memiliki motor dan SIM C", "Pengalaman dan non pengalaman silahkan melamar", "diutamakan domisili Kelapa Gading"],
     },
-    // Add more jobs as needed...
+    // Tambahkan lowongan lain jika diperlukan...
   ];
 
   return (
@@ -85,7 +84,7 @@ function JobSearch() {
       <Navbar />
 
       <div className="job-search-content">
-        <img src="https://via.placeholder.com/1500x200" alt="Ilustrasi" className="illustration-image" />
+        <img src="gambar.jpg" alt="Ilustrasi" className="illustration-image" />
         <h2 className="search-title">Cari Lowongan Kerja</h2>
         <div className="search-container">
           <input type="text" placeholder="Masukkan Kata Kunci" className="search-input" />
@@ -97,22 +96,32 @@ function JobSearch() {
         <div className="filter-options">
           <div className="filter-group">
             <label>Lokasi:</label>
-            <label><input type="radio" value="Jakarta" checked={selectedLocation === "Jakarta"} onChange={() => setSelectedLocation("Jakarta")} /> Jakarta</label>
-            <label><input type="radio" value="Bandung" checked={selectedLocation === "Bandung"} onChange={() => setSelectedLocation("Bandung")} /> Bandung</label>
-            <label><input type="radio" value="Surabaya" checked={selectedLocation === "Surabaya"} onChange={() => setSelectedLocation("Surabaya")} /> Surabaya</label>
+            <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
+              <option value="">Pilih Lokasi</option>
+              <option value="Jakarta">Jakarta</option>
+              <option value="Bandung">Bandung</option>
+              <option value="Surabaya">Surabaya</option>
+            </select>
           </div>
 
           <div className="filter-group">
             <label>Pekerjaan:</label>
-            <label><input type="radio" value="HRD" checked={selectedJobType === "HRD"} onChange={() => setSelectedJobType("HRD")} /> HRD</label>
-            <label><input type="radio" value="IT" checked={selectedJobType === "IT"} onChange={() => setSelectedJobType("IT")} /> IT</label>
-            <label><input type="radio" value="Marketing" checked={selectedJobType === "Marketing"} onChange={() => setSelectedJobType("Marketing")} /> Marketing</label>
+            <select value={selectedJobType} onChange={(e) => setSelectedJobType(e.target.value)}>
+              <option value="">Pilih Pekerjaan</option>
+              <option value="HRD">HRD</option>
+              <option value="IT">IT</option>
+              <option value="Marketing">Marketing</option>
+            </select>
           </div>
 
           <div className="filter-group">
             <label>Sistem Kerja:</label>
-            <label><input type="radio" value="Full Time" checked={selectedWorkSystem === "Full Time"} onChange={() => setSelectedWorkSystem("Full Time")} /> Full Time</label>
-            <label><input type="radio" value="Part Time" checked={selectedWorkSystem === "Part Time"} onChange={() => setSelectedWorkSystem("Part Time")} /> Part Time</label>
+            <select value={selectedWorkSystem} onChange={(e) => setSelectedWorkSystem(e.target.value)}>
+              <option value="">Pilih Sistem Kerja</option>
+              <option value="Full Time">Full Time</option>
+              <option value="Part Time">Part Time</option>
+              <option value="Freelance">Freelance</option>
+            </select>
           </div>
         </div>
 

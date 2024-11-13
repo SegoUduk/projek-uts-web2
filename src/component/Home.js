@@ -8,11 +8,11 @@ function Navbar() {
     <div className="navbar">
       <div className="logo">Logo</div>
       <div className="nav-links">
-      <Link to="/home" className="nav-link">Beranda</Link>
+        <Link to="/home" className="nav-link">Beranda</Link>
         <Link to="/JobSearch" className="nav-link">Cari Lowongan Kerja</Link>
         <Link to="/UploadJob" className="nav-link">Unggah Lowongan Kerja</Link>
       </div>
-      <button className="profile-button">Profil</button>
+      <a href='/Profil' className="profile-button">Profil</a>
     </div>
   );
 }
@@ -35,7 +35,7 @@ function Home() {
       {/* Main Content */}
       <div className="main-content">
         <img
-          src="https://via.placeholder.com/1500x200" // Ganti dengan URL gambar asli jika ada
+          src="./gambar.jpg" // Ganti dengan URL gambar asli jika ada
           alt="Ilustrasi"
           className="illustration-image"
         />

@@ -11,7 +11,7 @@ function Navbar() {
         <a href="/jobsearch" className="nav-link">Cari Lowongan Kerja</a>
         <a href="/uploadjob" className="nav-link active">Upload Lowongan Kerja</a>
       </div>
-      <button className="profile-button">Profil</button>
+      <a href='/Profil' className="profile-button">Profil</a>
     </div>
   );
 }
@@ -31,7 +31,7 @@ function UploadJob() {
 
       <div className="upload-job-content">
         <img
-          src="https://via.placeholder.com/1500x200"
+          src="gambar.jpg"
           alt="Ilustrasi"
           className="illustration-image"
         />
