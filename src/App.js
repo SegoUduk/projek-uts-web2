@@ -16,6 +16,9 @@ import JobCard from './components/JobCard.js';
 import JobDetail from './components/JobDetail.js';
 import JobList from './components/JobList.js';
 import HistoryUploadJobs from './pages/HistoryUploadJobs.js';
+import AboutUs from './pages/AboutUs.js';
+import Privacy from './pages/Privacy.js';
+import Kontak from './pages/Kontak.js';
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
           <Route path='/JobDetail' element={<JobDetail />} />
           <Route path='/JobList' element={<JobList />} />
           <Route path='/HistoryUploadJobs' element={<HistoryUploadJobs />} />
+          <Route path='/AboutUs' element={<AboutUs />} />
+          <Route path='/privacy' element={<Privacy />} />
+          <Route path='/Kontak' element={<Kontak />} />
         </Routes>
       </div>
     </Router>

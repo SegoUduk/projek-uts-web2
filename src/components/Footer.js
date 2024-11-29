@@ -10,13 +10,13 @@ function Footer() {
         </div>
         <ul className="footer-links">
           <li>
-            <a href="/about" className="footer-link">Tentang Kami</a>
+            <a href="/AboutUs" className="footer-link">Tentang Kami</a>
           </li>
           <li>
-            <a href="/privacy" className="footer-link">Kebijakan Privasi</a>
+            <a href="/Privacy" className="footer-link">Kebijakan Privasi</a>
           </li>
           <li>
-            <a href="/contact" className="footer-link">Kontak</a>
+            <a href="/kontak" className="footer-link">Kontak</a>
           </li>
         </ul>
         <div className="footer-copy">

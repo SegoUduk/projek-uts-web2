@@ -30,7 +30,7 @@ function Profile() {
           <a href="/notification" className="profile-option-buttonn">Notifikasi</a>
           <a href="/HistoriLamaran" className="profile-option-buttonn">Histori Lamaran</a>
           <a href='/HistoryUploadJobs' className="profile-option-buttonn">Histori Unggah Lowongan Kerja</a>
-          <button className="profile-option-button">Kontak Kami</button>
+          <a href='/Kontak' className="profile-option-buttonn">Kontak Kami</a>
           <button className="logout-button" onClick={handleLogout}>Log Out</button>
         </div>
       </div>
