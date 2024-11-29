@@ -2,28 +2,8 @@
 import React, { useState } from 'react';
 import './FormApplication.css';
 import { Navigate, useNavigate } from 'react-router-dom';
-
-function Navbar() {
-  return (
-    <div className="navbar">
-      <div className="logo">Logo</div>
-      <div className="nav-links">
-        <a href="/" className="nav-link">Beranda</a>
-        <a href="/jobsearch" className="nav-link">Cari Lowongan Kerja</a>
-        <a href="#" className="nav-link">Upload Lowongan Kerja</a>
-      </div>
-      <button className="profile-button">Profil</button>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      Footer
-    </div>
-  );
-}
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function FormApplication() {
     const [showConfirmation, setShowConfirmation] = useState(false);

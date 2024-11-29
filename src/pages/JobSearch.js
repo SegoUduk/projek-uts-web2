@@ -1,83 +1,16 @@
+// src/pages/JobSearch.js
 import React, { useState } from 'react';
 import './JobSearch.css';
-
-function Navbar() {
-  return (
-    <div className="navbar">
-      <div className="logo">Logo</div>
-      <div className="nav-links">
-        <a href="/Home" className="nav-link">Beranda</a>
-        <a href="/jobsearch" className="nav-link active">Cari Lowongan Kerja</a>
-        <a href="/uploadjob" className="nav-link">Upload Lowongan Kerja</a>
-      </div>
-      <a href="/Profil" className="profile-button">Profil</a>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      Footer
-    </div>
-  );
-}
-
-function JobCard({ job, onClick }) {
-  return (
-    <div className="job-card" onClick={() => onClick(job)}>
-      <div className="job-icon">🟠</div>
-      <div className="job-info">
-        <h3>{job.title}</h3>
-        <p>{job.company}</p>
-      </div>
-    </div>
-  );
-}
-
-function JobDetail({ job }) {
-  if (!job) {
-    return <div className="job-detail-placeholder">Anda Belum Memilih Lowongan Pekerjaan</div>;
-  }
-
-  return (
-    <div className="job-detail">
-      <h3>{job.title}</h3>
-      <p>{job.company}</p>
-      <p>Gaji: {job.salary}</p>
-      <p>Tipe Pekerjaan: {job.type}</p>
-      <h4>Profil Perusahaan</h4>
-      <p>{job.companyProfile}</p>
-      <h4>Kualifikasi :</h4>
-      <ul>
-        {job.qualifications.map((qual, index) => (
-          <li key={index}>{qual}</li>
-        ))}
-      </ul>
-      <button className="apply-button" onClick={() => window.location.href = '/FormApplication'}>
-        Lamar Pekerjaan
-      </button>
-    </div>
-  );
-}
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import JobList from '../components/JobList'; // Mengimpor JobList
+import JobDetail from '../components/JobDetail';
 
 function JobSearch() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedJobType, setSelectedJobType] = useState("");
   const [selectedWorkSystem, setSelectedWorkSystem] = useState("");
-
-  const jobs = [
-    {
-      title: "HRD",
-      company: "PT Mencari Cinta Sejati",
-      salary: "Rp. 3-4 Juta",
-      type: "Full Time",
-      companyProfile: "PT Mencari Cinta Sejati",
-      qualifications: ["max 25 tahun", "Pendidikan minimal SMK", "wajib memiliki motor dan SIM C", "Pengalaman dan non pengalaman silahkan melamar", "diutamakan domisili Kelapa Gading"],
-    },
-    // Tambahkan lowongan lain jika diperlukan...
-  ];
 
   return (
     <div>
@@ -95,7 +28,6 @@ function JobSearch() {
 
         <div className="filter-options">
           <div className="filter-group">
-            <label>Lokasi:</label>
             <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
               <option value="">Pilih Lokasi</option>
               <option value="Jakarta">Jakarta</option>
@@ -105,7 +37,6 @@ function JobSearch() {
           </div>
 
           <div className="filter-group">
-            <label>Pekerjaan:</label>
             <select value={selectedJobType} onChange={(e) => setSelectedJobType(e.target.value)}>
               <option value="">Pilih Pekerjaan</option>
               <option value="HRD">HRD</option>
@@ -115,7 +46,6 @@ function JobSearch() {
           </div>
 
           <div className="filter-group">
-            <label>Sistem Kerja:</label>
             <select value={selectedWorkSystem} onChange={(e) => setSelectedWorkSystem(e.target.value)}>
               <option value="">Pilih Sistem Kerja</option>
               <option value="Full Time">Full Time</option>
@@ -127,13 +57,18 @@ function JobSearch() {
 
         <div className="job-search-container">
           <div className="job-card-list">
-            {jobs.map((job, index) => (
-              <JobCard key={index} job={job} onClick={setSelectedJob} />
-            ))}
+            {/* Menggunakan JobList untuk menampilkan pekerjaan */}
+            <JobList 
+              selectedLocation={selectedLocation}
+              selectedJobType={selectedJobType}
+              selectedWorkSystem={selectedWorkSystem}
+              onSelectJob={setSelectedJob}
+            />
           </div>
 
           <div className="job-detail-container">
-            <JobDetail job={selectedJob} />
+            {/* Menampilkan detail pekerjaan yang dipilih */}
+            {selectedJob && <JobDetail job={selectedJob} />}
           </div>
         </div>
       </div>

@@ -2,28 +2,8 @@
 import React, { useState } from 'react';
 import './Biodata.css';
 import { useNavigate } from 'react-router-dom';
-
-function Navbar() {
-  return (
-    <div className="navbar">
-      <div className="logo">Logo</div>
-      <div className="nav-links">
-        <a href="/Home" className="nav-link">Beranda</a>
-        <a href="/JobSearch" className="nav-link">Cari Lowongan Kerja</a>
-        <a href="/Uploadjob" className="nav-link">Upload Lowongan Kerja</a>
-      </div>
-      <a href='/Profil' className="profile-button">Profil</a>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      Footer
-    </div>
-  );
-}
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function Biodata() {
   const [profileImage, setProfileImage] = useState(null);

@@ -1,0 +1,64 @@
+/* Footer Styling */
+.footer {
+    background-color: #343a40;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    margin-top: auto;
+    
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  /* Logo Section */
+  .footer-logo h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: #ffc107;
+  }
+  
+  /* Links Section */
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links .footer-link {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 14px;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .footer-links .footer-link:hover {
+    color: #ffc107;
+  }
+  
+  /* Copyright Section */
+  .footer-copy {
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .footer-links {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .footer-logo h2 {
+      font-size: 20px;
+    }
+  }
+  

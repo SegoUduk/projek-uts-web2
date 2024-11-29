@@ -2,28 +2,8 @@
 import React from 'react';
 import './Profil.css';
 import { useNavigate } from 'react-router-dom';
-
-function Navbar() {
-  return (
-    <div className="navbar">
-      <div className="logo">Logo</div>
-      <div className="nav-links">
-        <a href="/Home" className="nav-link">Beranda</a>
-        <a href="/jobsearch" className="nav-link">Cari Lowongan Kerja</a>
-        <a href="/UploadJob" className="nav-link">Upload Lowongan Kerja</a>
-      </div>
-      <button className="profile-button">Profil</button>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <div className="footer">
-      Footer
-    </div>
-  );
-}
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function Profile() {
   const navigate = useNavigate();
@@ -49,7 +29,7 @@ function Profile() {
           <button className="profile-option-button"onClick={() => navigate('/biodata')}>Biodata</button>
           <a href="/notification" className="profile-option-buttonn">Notifikasi</a>
           <a href="/HistoriLamaran" className="profile-option-buttonn">Histori Lamaran</a>
-          <button className="profile-option-button">Histori Unggah Lowongan Kerja</button>
+          <a href='/HistoryUploadJobs' className="profile-option-buttonn">Histori Unggah Lowongan Kerja</a>
           <button className="profile-option-button">Kontak Kami</button>
           <button className="logout-button" onClick={handleLogout}>Log Out</button>
         </div>
