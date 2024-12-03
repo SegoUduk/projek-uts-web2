@@ -8,10 +8,10 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="logo.png" alt="Logo" className="logo" />
+        <img src="/gambar/logo.png" alt="Logo" className="logo" />
       </div>
       <div className="navbar-menu">
-        <button className="menu-item" onClick={() => navigate('/Home')}>
+        <button className="menu-item" onClick={() => navigate('/BerandaAdmin')}>
           Beranda
         </button>
         <button className="menu-item" onClick={() => navigate('/List')}>
