@@ -1,77 +1,81 @@
 /* Navbar Container */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  
-  /* Logo Section */
-  .navbar-logo a {
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  /* Links Section */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Logo Section */
+.navbar-logo a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.logo-image {
+  width: 100px; /* Sesuaikan ukuran logo sesuai keinginan */
+  height: auto;
+}
+
+/* Links Section */
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links .nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-links .nav-link:hover {
+  color: #007bff;
+}
+
+/* Profile Button */
+.navbar-profile-button {
+  background-color: #ffc107;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-profile-button:hover {
+  background-color: #ffca28;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .navbar-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    display: none;
   }
-  
-  .navbar-links .nav-link {
-    text-decoration: none;
-    color: #333;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .navbar-links .nav-link:hover {
-    color: #007bff;
-  }
-  
-  /* Profile Button */
+
   .navbar-profile-button {
-    background-color: #ffc107;
-    border: none;
-    padding: 0.5rem 1rem;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
+    font-size: 14px;
+    padding: 0.4rem 0.8rem;
   }
-  
-  .navbar-profile-button:hover {
-    background-color: #ffca28;
+}
+
+@media (max-width: 768px) {
+  .navbar-logo a {
+    font-size: 18px;
   }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .navbar-links {
-      display: none;
-    }
-  
-    .navbar-profile-button {
-      font-size: 14px;
-      padding: 0.4rem 0.8rem;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .navbar-logo a {
-      font-size: 18px;
-    }
-  }
-  
+}

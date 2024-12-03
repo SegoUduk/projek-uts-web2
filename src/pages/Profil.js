@@ -18,7 +18,7 @@ function Profile() {
       {/* Main Content */}
       <div className="profile-content">
         <img
-          src="gambar.jpg"
+          src="/gambar/gambar.jpg"
           alt="Ilustrasi"
           className="illustration-image"
         />

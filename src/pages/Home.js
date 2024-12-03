@@ -9,7 +9,7 @@ function Home() {
       <Navbar />
       <div className="banner">
         <img
-          src="gambar.jpg"
+          src="/gambar/gambar.jpg"
           alt="Banner"
           className="banner-image"
         />

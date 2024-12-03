@@ -11,7 +11,7 @@ function UploadJob() {
 
       <div className="upload-job-content">
         <img
-          src="gambar.jpg"
+          src="/gambar/gambar.jpg"
           alt="Ilustrasi"
           className="illustration-image"
         />

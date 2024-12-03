@@ -17,7 +17,7 @@ function JobSearch() {
       <Navbar />
 
       <div className="job-search-content">
-        <img src="gambar.jpg" alt="Ilustrasi" className="illustration-image" />
+        <img src="/gambar/gambar.jpg" alt="Ilustrasi" className="illustration-image" />
         <h2 className="search-title">Cari Lowongan Kerja</h2>
         <div className="search-container">
           <input type="text" placeholder="Masukkan Kata Kunci" className="search-input" />
