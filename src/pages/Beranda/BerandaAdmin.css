@@ -1,106 +1,110 @@
-/* General Layout */
+/* BerandaAdmin CSS */
 .beranda-admin {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  /* Content Section */
-  .content {
-    flex: 1;
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  /* Job List */
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  padding: 2rem;
+}
+
+.job-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.job-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 280px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+  transform: scale(1.05);
+}
+
+.job-card h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.job-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.job-details {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.job-details h2 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.job-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.job-details ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.button-group {
+  margin-top: 2rem;
+}
+
+.accept-btn,
+.ban-btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.accept-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.accept-btn:hover {
+  background-color: #218838;
+}
+
+.ban-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.ban-btn:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
   .job-list {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
+    justify-content: center;
   }
-  
+
   .job-card {
-    width: 30%;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    width: 100%;
   }
-  
-  .job-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .job-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .job-card p {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  /* Job Details */
+
   .job-details {
-    max-width: 800px;
-    margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
   }
-  
-  .job-details h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .job-details p {
-    font-size: 16px;
-    margin: 5px 0;
-    color: #555;
-  }
-  
-  /* Button Group */
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
-  .accept-btn,
-  .ban-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .accept-btn {
-    background-color: #4caf50; /* Green */
-    color: #fff;
-  }
-  
-  .accept-btn:hover {
-    background-color: #45a049;
-  }
-  
-  .ban-btn {
-    background-color: #f44336; /* Red */
-    color: #fff;
-  }
-  
-  .ban-btn:hover {
-    background-color: #e53935;
-  }
-  
+}
