@@ -19,7 +19,7 @@ function UploadJob() {
 
         <form className="upload-job-form">
           <div className="form-group">
-            <label htmlFor="companyDescription">Deskripsi Singkat tentang Perusahaan:</label>
+            <label htmlFor="companyDescription">Nama Perusahaan:</label>
             <textarea id="companyDescription" className="form-input" rows="3" required></textarea>
           </div>
 
@@ -49,7 +49,7 @@ function UploadJob() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="location">Lokasi:</label>
+            <label htmlFor="location">Alamat Pekerjaan:</label>
             <input type="text" id="location" className="form-input" required />
           </div>
 
