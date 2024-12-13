@@ -1,60 +1,11 @@
+// src/BerandaAdmin.js
 import React, { useState } from 'react';
 import './BerandaAdmin.css';
-import Footer from '../components/FooterAdmin';
-import Navbar from '../components/NavbarAdmin';
+import NavbarAdmin from '../components/NavbarAdmin';
+import FooterAdmin from '../components/FooterAdmin';
 
-
-function BerandaAdmin() {
+function BerandaAdmin({ uploadedJobs, setUploadedJobs }) {
   const [selectedJob, setSelectedJob] = useState(null);
-
-  // Data Dummy untuk Loker
-  const jobs = [
-    {
-      id: 1,
-      title: 'Software Engineer',
-      company: 'Tech Corp',
-      salary: 'Rp 10.000.000 - Rp 15.000.000',
-      location: 'Jakarta',
-      jobType: 'Fulltime',
-      companyProfile: 'Tech Corp is a leading software development company...',
-      qualifications: [
-        'Bachelor\'s degree in Computer Science or related field',
-        'Proficient in JavaScript, React, Node.js',
-        'Experience with database management',
-      ],
-      description: 'Job description for Software Engineer...',
-    },
-    {
-      id: 2,
-      title: 'Data Scientist',
-      company: 'Data Inc',
-      salary: 'Rp 8.000.000 - Rp 12.000.000',
-      location: 'Bandung',
-      jobType: 'Part-time',
-      companyProfile: 'Data Inc specializes in data analytics and machine learning solutions...',
-      qualifications: [
-        'Bachelor\'s degree in Data Science, Statistics, or related field',
-        'Proficient in Python and machine learning algorithms',
-        'Strong analytical and problem-solving skills',
-      ],
-      description: 'Job description for Data Scientist...',
-    },
-    {
-      id: 3,
-      title: 'UI/UX Designer',
-      company: 'Creative Studio',
-      salary: 'Rp 7.000.000 - Rp 10.000.000',
-      location: 'Surabaya',
-      jobType: 'Freelance',
-      companyProfile: 'Creative Studio is a design agency specializing in UI/UX...',
-      qualifications: [
-        'Experience with design tools like Figma, Sketch, Adobe XD',
-        'Strong portfolio of design work',
-        'Knowledge of user research and testing methodologies',
-      ],
-      description: 'Job description for UI/UX Designer...',
-    },
-  ];
 
   const handleViewJob = (job) => {
     setSelectedJob(job);
@@ -70,45 +21,52 @@ function BerandaAdmin() {
     setSelectedJob(null);
   };
 
+  const handleDeleteJob = (jobToDelete) => {
+    const updatedJobs = uploadedJobs.filter((job) => job !== jobToDelete);
+    setUploadedJobs(updatedJobs);
+    alert('Loker berhasil dihapus!');
+    setSelectedJob(null);
+  };
+
   return (
     <div className="beranda-admin">
-      <Navbar />
-
+      <NavbarAdmin />
       <div className="content">
         {!selectedJob ? (
           <div className="job-list">
-            {jobs.map((job) => (
-              <div key={job.id} className="job-card" onClick={() => handleViewJob(job)}>
-                <h3>{job.title}</h3>
-                <p>{job.company}</p>
-                <p>{job.location}</p>
-              </div>
-            ))}
+            {uploadedJobs.length === 0 ? (
+              <p>Tidak ada loker yang tersedia.</p>
+            ) : (
+              uploadedJobs.map((job, index) => (
+                <div key={index} className="job-card">
+                  <h3>{job.company}</h3>
+                  <p><strong>Lokasi:</strong> {job.location}</p>
+                  <p><strong>Gaji:</strong> {job.salary}</p>
+                  <p><strong>Posisi:</strong> {job.potition}</p>
+                  <button className="detail-button" onClick={() => handleViewJob(job)}>Lihat Detail</button>
+                  <button className="delete-button" onClick={() => handleDeleteJob(job)}>Hapus</button>
+                </div>
+              ))
+            )}
           </div>
         ) : (
           <div className="job-details">
-            <h2>{selectedJob.title}</h2>
-            <p><strong>Perusahaan:</strong> {selectedJob.company}</p>
+            <h2>{selectedJob.company}</h2>
+            <p><strong>Posisi:</strong> {selectedJob.potition}</p>
+            <p><strong>Deskripsi:</strong> {selectedJob.description}</p>
             <p><strong>Gaji:</strong> {selectedJob.salary}</p>
+            <p><strong>Sistem Kerja:</strong> {selectedJob.workSystem}</p>
+            <p><strong>Kualifikasi:</strong> {selectedJob.qualifications}</p>
             <p><strong>Lokasi:</strong> {selectedJob.location}</p>
-            <p><strong>Jenis Pekerjaan:</strong> {selectedJob.jobType}</p>
-            <p><strong>Profil Perusahaan:</strong> {selectedJob.companyProfile}</p>
-            <p><strong>Kualifikasi:</strong></p>
-            <ul>
-              {selectedJob.qualifications.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-            <p>{selectedJob.description}</p>
             <div className="button-group">
-              <button className="accept-btn" onClick={handleAcceptJob}>Terima</button>
-              <button className="ban-btn" onClick={handleBanJob}>Ban</button>
+              <button className="accept-button" onClick={handleAcceptJob}>Terima</button>
+              <button className="ban-button" onClick={handleBanJob}>Ban</button>
+              <button className="delete-button" onClick={() => handleDeleteJob(selectedJob)}>Hapus</button>
             </div>
           </div>
         )}
       </div>
-
-      <Footer />
+      <FooterAdmin />
     </div>
   );
 }

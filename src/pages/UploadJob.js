@@ -1,62 +1,145 @@
-// src/UploadJob.js
-import React from 'react';
+import React, { useState } from 'react';
 import './UploadJob.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../components/Navbar'; // Pastikan path sesuai
+import Footer from '../components/Footer'; // Pastikan path sesuai
 
-function UploadJob() {
+function UploadJob({ onJobUpload }) {
+  const [formData, setFormData] = useState({
+    company: '',
+    description: '',
+    qualifications: '',
+    salary: '',
+    workSystem: '',
+    location: '',
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onJobUpload(formData); // Mengirim data ke komponen induk
+    alert('Lowongan kerja berhasil diupload!');
+    setFormData({
+      company: '',
+      description: '',
+      potition: '',
+      qualifications: '',
+      salary: '',
+      workSystem: '',
+      location: '',
+    });
+  };
+
   return (
     <div>
       <Navbar />
-
-      <div className="upload-job-content">
+      {/* Banner dengan gambar */}
+      <div className="upload-job-banner">
         <img
           src="/gambar/gambar.jpg"
-          alt="Ilustrasi"
-          className="illustration-image"
+          alt="Banner Upload Job"
+          className="banner-image"
         />
+      </div>
+
+      {/* Konten utama */}
+      <div className="upload-job-content">
         <h2 className="form-title">Upload Lowongan Kerja</h2>
-
-        <form className="upload-job-form">
+        <form className="upload-job-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="companyDescription">Nama Perusahaan:</label>
-            <textarea id="companyDescription" className="form-input" rows="3" required></textarea>
+            <label htmlFor="company">Nama Perusahaan:</label>
+            <textarea
+              id="company"
+              className="form-input"
+              rows="2"
+              value={formData.company}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
 
           <div className="form-group">
-            <label htmlFor="jobDescription">Deskripsi Singkat tentang Pekerjaan:</label>
-            <textarea id="jobDescription" className="form-input" rows="3" required></textarea>
+            <label htmlFor="description">Deskripsi Singkat:</label>
+            <textarea
+              id="description"
+              className="form-input"
+              rows="3"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
 
           <div className="form-group">
-            <label htmlFor="qualifications">Kualifikasi Pekerjaan:</label>
-            <textarea id="qualifications" className="form-input" rows="3" required></textarea>
+            <label htmlFor="potition">Posisi:</label>
+            <textarea
+              id="potition"
+              className="form-input"
+              rows="3"
+              value={formData.potition}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="qualifications">Kualifikasi:</label>
+            <textarea
+              id="qualifications"
+              className="form-input"
+              rows="3"
+              value={formData.qualifications}
+              onChange={handleChange}
+              required
+            ></textarea>
           </div>
 
           <div className="form-group">
             <label htmlFor="salary">Gaji:</label>
-            <input type="text" id="salary" className="form-input" required />
+            <input
+              type="text"
+              id="salary"
+              className="form-input"
+              value={formData.salary}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="workSystem">Sistem Kerja:</label>
-            <select id="workSystem" className="form-input" required>
+            <select
+              id="workSystem"
+              className="form-input"
+              value={formData.workSystem}
+              onChange={handleChange}
+              required
+            >
               <option value="">Pilih Sistem Kerja</option>
-              <option value="fulltime">Full Time</option>
-              <option value="parttime">Part Time</option>
-              <option value="freelance">Freelance</option>
+              <option value="Fulltime">Full Time</option>
+              <option value="Part-time">Part Time</option>
+              <option value="Freelance">Freelance</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label htmlFor="location">Alamat Pekerjaan:</label>
-            <input type="text" id="location" className="form-input" required />
+            <label htmlFor="location">Alamat:</label>
+            <input
+              type="text"
+              id="location"
+              className="form-input"
+              value={formData.location}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <button type="submit" className="submit-button">Submit</button>
         </form>
       </div>
-
       <Footer />
     </div>
   );

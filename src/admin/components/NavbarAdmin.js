@@ -11,7 +11,7 @@ function Navbar() {
         <img src="/gambar/logo.png" alt="Logo" className="logo" />
       </div>
       <div className="navbar-menu">
-        <button className="menu-item" onClick={() => navigate('/BerandaAdmin')}>
+        <button className="menu-item" onClick={() => navigate('/pages/BerandaAdmin')}>
           Beranda
         </button>
         <button className="menu-item" onClick={() => navigate('/List')}>
