@@ -19,6 +19,7 @@ import HistoryUploadJobs from './pages/HistoryUploadJobs.js';
 import AboutUs from './pages/AboutUs.js';
 import Privacy from './pages/Privacy.js';
 import Kontak from './pages/Kontak.js';
+import BerandaAdmin from './admin/pages/BerandaAdmin.js';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path='/AboutUs' element={<AboutUs />} />
           <Route path='/privacy' element={<Privacy />} />
           <Route path='/Kontak' element={<Kontak />} />
+          <Route path='/admin/pages/BerandaAdmin' element={<BerandaAdmin />} />
         </Routes>
       </div>
     </Router>

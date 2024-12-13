@@ -1,4 +1,3 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -9,6 +8,12 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Data akun admin
+  const adminCredentials = {
+    email: 'admin@website.com',
+    password: 'admin123',
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
 
@@ -17,9 +22,15 @@ function Login() {
       return;
     }
 
-    // Reset pesan error dan navigasi jika validasi lolos
-    setErrorMessage('');
-    navigate('/Home');
+    // Validasi admin
+    if (email === adminCredentials.email && password === adminCredentials.password) {
+      setErrorMessage('');
+      navigate('./admin/pages/BerandaAdmin'); // Arahkan ke BerandaAdmin
+    } else {
+      // Validasi user biasa
+      setErrorMessage('');
+      navigate('/home');
+    }
   };
 
   return (
