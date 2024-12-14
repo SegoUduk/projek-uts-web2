@@ -1,72 +1,106 @@
-/* Banner Styling */
+/* UploadJob.css */
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 .upload-job-banner {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.upload-job-banner .banner-image {
   width: 100%;
-  height: auto;
-  max-height: 300px;
-  object-fit: cover;
-  border-bottom: 3px solid #ccc;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f4f4f4;
 }
 
-/* Form container */
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .upload-job-content {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
-  background: #f9f9f9;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-title {
   text-align: center;
-  font-size: 1.8em;
-  font-weight: bold;
   margin-bottom: 20px;
+  font-size: 1.8rem;
   color: #333;
 }
 
-/* Form styling */
-.upload-job-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group {
+.upload-job-form .form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
-  font-size: 1em;
-  font-weight: bold;
-  margin-bottom: 5px;
+.upload-job-form label {
   display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
 }
 
-.form-input {
+.upload-job-form .form-input,
+.upload-job-form textarea,
+.upload-job-form select {
   width: 100%;
   padding: 10px;
-  font-size: 1em;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.upload-job-form .form-input:focus,
+.upload-job-form textarea:focus,
+.upload-job-form select:focus {
+  border-color: #007bff;
+}
+
+textarea {
   resize: none;
 }
 
 .submit-button {
-  background-color: #cfc341;
-  color: white;
-  font-size: 1em;
-  padding: 10px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .submit-button:hover {
-  background-color: #d6d30b;
+  background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .upload-job-content {
+    padding: 15px;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .submit-button {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }

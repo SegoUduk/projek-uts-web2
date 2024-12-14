@@ -1,135 +1,148 @@
-/* Global styles for the Job Search page */
-.job-search-content {
-  padding: 20px;
-  background-color: #f4f4f9;
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+.upload-job-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-color: #f4f4f4;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.job-search-page {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+}
+
+.job-search-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
 .search-title {
   text-align: center;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 1.8rem;
   margin-bottom: 20px;
   color: #333;
 }
 
-/* Search bar */
-.search-container {
-  text-align: center;
-  margin-bottom: 20px;
+/* Search and Filter Container */
+.search-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 .search-input {
-  width: 60%;
   padding: 10px;
-  border: 1px solid #ccc;
+  font-size: 1rem;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  font-size: 16px;
+  width: 300px;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Filter options */
 .filter-options {
   display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.filter-group select {
-  padding: 10px;
-  border: 1px solid #ccc;
+.filter-select {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  font-size: 16px;
-  width: 200px;
+  background-color: #fff;
+  cursor: pointer;
 }
 
-.filter-group select:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-}
-
-/* Job List and Detail Container */
-.job-search-container {
-  display: flex;
+/* Job List */
+.job-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
-.job-card-list {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
 .job-card {
-  background-color: #fff;
+  background-color: #ffffff;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   padding: 15px;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .job-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .job-card h3 {
-  font-size: 20px;
-  margin: 0 0 10px;
+  font-size: 1.2rem;
   color: #007bff;
+  margin-bottom: 10px;
 }
 
 .job-card p {
-  font-size: 14px;
+  font-size: 0.95rem;
   margin: 5px 0;
   color: #555;
 }
 
-.job-card strong {
-  font-weight: bold;
-  color: #333;
-}
-
-/* Job Detail Container */
-.job-detail-container {
-  flex: 1.5;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.job-detail-placeholder {
-  font-size: 16px;
-  color: #777;
+.no-jobs-message {
   text-align: center;
-  padding: 20px;
+  font-size: 1.1rem;
+  color: #777;
 }
 
-/* Responsive Layout */
-@media screen and (max-width: 768px) {
-  .job-search-container {
-    flex-direction: column;
-  }
+/* Job Detail Overlay */
+.job-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .search-input {
-    width: 90%;
+.job-detail-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .search-input,
+  .filter-select {
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .filter-options {
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
   }
 }

@@ -40,7 +40,7 @@ function BerandaAdmin({ uploadedJobs, setUploadedJobs, setPublishedJobs }) {
         {!selectedJob ? (
           <div className="job-list">
             {uploadedJobs.length === 0 ? (
-              <p>Tidak ada loker yang tersedia.</p>
+              <p className="empty-message">Tidak ada loker yang tersedia.</p>
             ) : (
               uploadedJobs.map((job, index) => (
                 <div key={index} className="job-card">

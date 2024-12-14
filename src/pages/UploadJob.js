@@ -7,6 +7,7 @@ function UploadJob({ onJobUpload }) {
   const [formData, setFormData] = useState({
     company: '',
     description: '',
+    position: '',
     qualifications: '',
     salary: '',
     workSystem: '',
@@ -20,12 +21,18 @@ function UploadJob({ onJobUpload }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onJobUpload(formData); // Mengirim data ke komponen induk
+    const newJob = {
+      ...formData,
+      id: Date.now(),
+      status: 'Pending',
+      qualifications: formData.qualifications.split(',').map((q) => q.trim()),
+    };
+    onJobUpload(newJob); // Mengirim data ke komponen induk
     alert('Lowongan kerja berhasil diupload!');
     setFormData({
       company: '',
       description: '',
-      potition: '',
+      position: '',
       qualifications: '',
       salary: '',
       workSystem: '',
@@ -74,19 +81,19 @@ function UploadJob({ onJobUpload }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="potition">Posisi:</label>
+            <label htmlFor="position">Posisi:</label>
             <textarea
-              id="potition"
+              id="position"
               className="form-input"
-              rows="3"
-              value={formData.potition}
+              rows="2"
+              value={formData.position}
               onChange={handleChange}
               required
             ></textarea>
           </div>
 
           <div className="form-group">
-            <label htmlFor="qualifications">Kualifikasi:</label>
+            <label htmlFor="qualifications">Kualifikasi (pisahkan dengan koma):</label>
             <textarea
               id="qualifications"
               className="form-input"
