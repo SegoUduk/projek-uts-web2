@@ -13,6 +13,7 @@ import Profil from './pages/Profil';
 import Biodata from './pages/Biodata';
 import Notification from './pages/Notification';
 import HistoriLamaran from './pages/HistoriLamaran';
+import HistoryUploadJobs from './pages/HistoryUploadJobs'; // Tambahan Route
 import AboutUs from './pages/AboutUs';
 import Privacy from './pages/Privacy';
 import Kontak from './pages/Kontak';
@@ -51,6 +52,7 @@ function App() {
           <Route path="/biodata" element={<Biodata />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/historilamaran" element={<HistoriLamaran />} />
+          <Route path="/historyuploadjobs" element={<HistoryUploadJobs />} /> {/* Tambahan Route */}
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/kontak" element={<Kontak />} />

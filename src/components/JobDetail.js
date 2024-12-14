@@ -20,7 +20,7 @@ function JobDetail({ job, onClose }) {
         <p><strong>Gaji:</strong> {job.salary}</p>
         <p><strong>Lokasi:</strong> {job.location}</p>
         <p><strong>Sistem Kerja:</strong> {job.workSystem}</p>
-        <p><strong>Deskripsi Pekerjaan:</strong> {job.description}</p>
+        <p><strong>Deskripsi Perusahaan:</strong> {job.description}</p>
         <p><strong>Kualifikasi:</strong></p>
         <ul>
           {job.qualifications.map((qual, index) => (

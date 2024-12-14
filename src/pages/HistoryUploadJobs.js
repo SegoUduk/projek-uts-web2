@@ -49,36 +49,18 @@ function HistoryUploadJobs() {
     },
   ];
 
-  const handleAcceptApplicant = (jobId, applicantId) => {
+  const handleApplicantStatusChange = (jobId, applicantId, newStatus) => {
     const updatedJobs = jobsUploaded.map((job) => {
       if (job.id === jobId) {
-        const updatedApplicants = job.applicants.map((applicant) => {
-          if (applicant.id === applicantId) {
-            return { ...applicant, status: "accepted" };
-          }
-          return applicant;
-        });
+        const updatedApplicants = job.applicants.map((applicant) =>
+          applicant.id === applicantId ? { ...applicant, status: newStatus } : applicant
+        );
         return { ...job, applicants: updatedApplicants };
       }
       return job;
     });
-    setSelectedJob(updatedJobs.find((job) => job.id === selectedJob.id)); // Perbarui detail pelamar
-  };
 
-  const handleRejectApplicant = (jobId, applicantId) => {
-    const updatedJobs = jobsUploaded.map((job) => {
-      if (job.id === jobId) {
-        const updatedApplicants = job.applicants.map((applicant) => {
-          if (applicant.id === applicantId) {
-            return { ...applicant, status: "rejected" };
-          }
-          return applicant;
-        });
-        return { ...job, applicants: updatedApplicants };
-      }
-      return job;
-    });
-    setSelectedJob(updatedJobs.find((job) => job.id === selectedJob.id)); // Perbarui detail pelamar
+    setSelectedJob(updatedJobs.find((job) => job.id === jobId));
   };
 
   return (
@@ -86,7 +68,6 @@ function HistoryUploadJobs() {
       <Navbar />
       <div className="job-histori-container">
         <h2 className="search-title">Histori Unggah Lowongan Kerja</h2>
-
         <button className="back-button" onClick={() => window.history.back()}>
           Kembali
         </button>
@@ -94,11 +75,7 @@ function HistoryUploadJobs() {
         <div className="job-histori-content">
           <div className="job-list">
             {jobsUploaded.map((job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-                onClick={() => setSelectedJob(job)}
-              />
+              <JobCard key={job.id} job={job} onClick={() => setSelectedJob(job)} />
             ))}
           </div>
 
@@ -131,7 +108,7 @@ function HistoryUploadJobs() {
                             <>
                               <button
                                 onClick={() =>
-                                  handleAcceptApplicant(selectedJob.id, applicant.id)
+                                  handleApplicantStatusChange(selectedJob.id, applicant.id, "accepted")
                                 }
                                 className="accept-button"
                               >
@@ -139,7 +116,7 @@ function HistoryUploadJobs() {
                               </button>
                               <button
                                 onClick={() =>
-                                  handleRejectApplicant(selectedJob.id, applicant.id)
+                                  handleApplicantStatusChange(selectedJob.id, applicant.id, "rejected")
                                 }
                                 className="reject-button"
                               >
