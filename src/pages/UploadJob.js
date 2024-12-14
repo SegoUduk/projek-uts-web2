@@ -69,7 +69,7 @@ function UploadJob({ onJobUpload }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Deskripsi Singkat:</label>
+            <label htmlFor="description">Deskripsi Singkat Pekerjaan:</label>
             <textarea
               id="description"
               className="form-input"

@@ -19,7 +19,7 @@ function JobDetail({ job, onClose }) {
         <h4>{job.company}</h4>
         <p><strong>Gaji:</strong> {job.salary}</p>
         <p><strong>Lokasi:</strong> {job.location}</p>
-        <p><strong>Sistem Kerja:</strong> {job.type}</p>
+        <p><strong>Sistem Kerja:</strong> {job.workSystem}</p>
         <p><strong>Deskripsi Pekerjaan:</strong> {job.description}</p>
         <p><strong>Kualifikasi:</strong></p>
         <ul>

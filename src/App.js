@@ -19,7 +19,7 @@ import Kontak from './pages/Kontak';
 
 // Halaman Admin
 import BerandaAdmin from './admin/pages/BerandaAdmin';
-import HistoryUploadJobs from './pages/HistoryUploadJobs';
+import ListPage from './admin/pages/ListPage'; // Halaman List baru
 
 // Komponen Umum
 import Navbar from './components/Navbar';
@@ -29,6 +29,7 @@ function App() {
   // State untuk lowongan kerja
   const [uploadedJobs, setUploadedJobs] = useState([]); // Lowongan kerja yang di-upload admin
   const [publishedJobs, setPublishedJobs] = useState([]); // Lowongan kerja yang diterima dan dipublikasikan
+  const [bannedJobs, setBannedJobs] = useState([]); // Lowongan kerja yang ditolak (dibanned)
 
   // Fungsi untuk menangani unggahan pekerjaan baru
   const handleJobUpload = (jobData) => {
@@ -65,7 +66,12 @@ function App() {
               />
             }
           />
-          <Route path="/historyuploadjobs" element={<HistoryUploadJobs />} />
+          <Route
+            path="/admin/pages/ListPage"
+            element={
+              <ListPage publishedJobs={publishedJobs} bannedJobs={bannedJobs} />
+            }
+          />
 
           {/* Komponen Umum */}
           <Route path="/navbar" element={<Navbar />} />

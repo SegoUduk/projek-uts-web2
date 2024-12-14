@@ -11,10 +11,10 @@ function Navbar() {
         <img src="/gambar/logo.png" alt="Logo" className="logo" />
       </div>
       <div className="navbar-menu">
-        <button className="menu-item" onClick={() => navigate('/pages/BerandaAdmin')}>
+        <button className="menu-item" onClick={() => navigate('/admin/pages/BerandaAdmin')}>
           Beranda
         </button>
-        <button className="menu-item" onClick={() => navigate('/List')}>
+        <button className="menu-item" onClick={() => navigate('/admin/pages/ListPage')}>
           List
         </button>
       </div>

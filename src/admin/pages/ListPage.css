@@ -1,0 +1,100 @@
+/* ListPage.css */
+
+.list-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  .content {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .page-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .job-section {
+    margin-bottom: 30px;
+  }
+  
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #444;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .job-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Gaya Kartu Loker */
+  .job-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .job-card h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  
+  .job-card p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .job-card strong {
+    color: #444;
+  }
+  
+  /* Gaya untuk Loker Diterima */
+  .job-card.accepted {
+    border-left: 5px solid #28a745;
+  }
+  
+  /* Gaya untuk Loker Ditolak */
+  .job-card.rejected {
+    border-left: 5px solid #dc3545;
+  }
+  
+  /* Efek Hover */
+  .job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .empty-message {
+    text-align: center;
+    color: #888;
+    font-size: 16px;
+    font-style: italic;
+  }
+  
+  /* Responsif */
+  @media (max-width: 768px) {
+    .job-list {
+      grid-template-columns: 1fr;
+    }
+  
+    .job-card {
+      padding: 15px;
+    }
+  }
+  
