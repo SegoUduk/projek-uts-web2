@@ -1,0 +1,49 @@
+/* Styling for JobDetailAdmin */
+.job-detail-admin {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .job-detail-admin h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .job-detail-admin p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .back-button, .accept-button, .delete-button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .back-button {
+    background-color: #6c757d;
+  }
+  
+  .accept-button {
+    background-color: #28a745;
+  }
+  
+  .delete-button {
+    background-color: #e74c3c;
+  }
+  

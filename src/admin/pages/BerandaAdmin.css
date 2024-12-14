@@ -1,152 +1,55 @@
-/* BerandaAdmin.css */
-
+/* Global styling for BerandaAdmin */
 .beranda-admin {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
+  background-color: #f4f4f9;
   min-height: 100vh;
 }
 
 .content {
-  flex: 1;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .job-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 
 .job-card {
+  background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 15px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: calc(33.333% - 20px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .job-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .job-card h3 {
   font-size: 18px;
   margin-bottom: 10px;
-  color: #333;
+  color: #007bff;
 }
 
 .job-card p {
+  font-size: 14px;
   margin: 5px 0;
-  font-size: 14px;
   color: #555;
-}
-
-.detail-button,
-.delete-button {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .detail-button {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.detail-button:hover {
-  background-color: #0056b3;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  color: #fff;
-  margin-left: 10px;
-}
-
-.delete-button:hover {
-  background-color: #a71d2a;
-}
-
-.job-details {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 20px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.job-details h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.job-details p {
-  margin: 10px 0;
-  font-size: 16px;
-  color: #555;
-}
-
-.button-group {
-  margin-top: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.accept-button,
-.ban-button,
-.delete-detail-button {
   padding: 10px 15px;
+  margin-top: 10px;
   border: none;
   border-radius: 5px;
-  font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.accept-button {
-  background-color: #28a745;
+  background-color: #007bff;
   color: #fff;
-}
-
-.accept-button:hover {
-  background-color: #218838;
-}
-
-.ban-button {
-  background-color: #ffc107;
-  color: #fff;
-}
-
-.ban-button:hover {
-  background-color: #e0a800;
-}
-
-.delete-detail-button {
-  background-color: #dc3545;
-  color: #fff;
-}
-
-.delete-detail-button:hover {
-  background-color: #a71d2a;
-}
-
-/* Responsive Styling */
-@media (max-width: 768px) {
-  .job-list {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-
-  .job-details {
-    padding: 15px;
-  }
 }

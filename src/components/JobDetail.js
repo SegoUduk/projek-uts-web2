@@ -1,18 +1,19 @@
-// src/components/JobDetail.js
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Menggunakan useNavigate untuk berpindah halaman
+import { useNavigate } from 'react-router-dom';
+import './JobDetail.css';
 
-function JobDetail({ job }) {
-  const navigate = useNavigate(); // Inisialisasi useNavigate
+function JobDetail({ job, onClose }) {
+  const navigate = useNavigate();
 
-  if (!job) return <div className="job-detail-placeholder">Pilih Pekerjaan untuk Melihat Detail</div>;
+  if (!job) return null;
 
   const handleApplyClick = () => {
-    navigate('/FormApplication'); // Mengarahkan ke halaman FormApplication
+    navigate('/formapplication'); // Arahkan ke FormApplication
   };
 
   return (
     <div className="job-detail">
+      <button className="close-button" onClick={onClose}>Kembali</button>
       <h3>{job.title}</h3>
       <h4>{job.company}</h4>
       <p><strong>Gaji:</strong> {job.salary}</p>
@@ -24,8 +25,6 @@ function JobDetail({ job }) {
           <li key={index}>{qual}</li>
         ))}
       </ul>
-
-      {/* Tombol untuk melamar pekerjaan */}
       <button className="apply-button" onClick={handleApplyClick}>
         Lamar Pekerjaan
       </button>

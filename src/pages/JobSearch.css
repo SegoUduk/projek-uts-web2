@@ -1,211 +1,135 @@
-/* Container utama untuk halaman JobSearch */
+/* Global styles for the Job Search page */
 .job-search-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
+  background-color: #f4f4f9;
+  min-height: 100vh;
 }
 
-/* Ilustrasi gambar di bagian atas */
-.illustration-image {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-}
-
-/* Judul untuk halaman pencarian */
 .search-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-/* Container untuk input pencarian */
+/* Search bar */
 .search-container {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 600px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .search-input {
-  flex: 1;
-  padding: 0.8rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s ease-in-out;
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
 .search-input:focus {
-  border-color: #ffd700;
   outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-.search-button {
-  background-color: #ffd700;
-  border: none;
-  padding: 0.8rem 1.2rem;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.search-button:hover {
-  background-color: #0056b3;
-}
-
-.search-icon {
-  width: 20px;
-  height: 20px;
-  filter: invert(1);
-}
-
-/* Filter options styling */
+/* Filter options */
 .filter-options {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
   justify-content: center;
-}
-
-.filter-group {
-  display: flex;
-  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .filter-group select {
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  transition: border-color 0.3s ease-in-out;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
 }
 
 .filter-group select:focus {
-  border-color: #007bff;
   outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Container untuk daftar pekerjaan dan detail pekerjaan */
+/* Job List and Detail Container */
 .job-search-container {
   display: flex;
-  gap: 2rem;
-  width: 100%;
-  margin-top: 2rem;
+  gap: 20px;
 }
 
-/* Daftar pekerjaan */
 .job-card-list {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .job-card {
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 15px;
   cursor: pointer;
-  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .job-card:hover {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .job-card h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
+  font-size: 20px;
+  margin: 0 0 10px;
+  color: #007bff;
 }
 
 .job-card p {
-  margin: 0.2rem 0;
+  font-size: 14px;
+  margin: 5px 0;
   color: #555;
-  font-size: 0.9rem;
 }
 
-.no-jobs-message {
-  font-size: 1.2rem;
-  color: #999;
-  text-align: center;
-}
-
-/* Detail pekerjaan */
-.job-detail-container {
-  flex: 1;
-  background-color: #f9f9f9;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-}
-
-.job-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.job-detail h2 {
-  font-size: 1.8rem;
+.job-card strong {
   font-weight: bold;
   color: #333;
 }
 
-.job-detail p {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-  color: #555;
+/* Job Detail Container */
+.job-detail-container {
+  flex: 1.5;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.job-detail p strong {
-  color: #333;
+.job-detail-placeholder {
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+  padding: 20px;
 }
 
-/* Media Queries untuk responsivitas */
-@media (max-width: 768px) {
-  .filter-options {
-    flex-direction: column;
-    align-items: center;
-  }
-
+/* Responsive Layout */
+@media screen and (max-width: 768px) {
   .job-search-container {
     flex-direction: column;
   }
 
-  .illustration-image {
-    max-height: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  .search-container {
-    flex-direction: column;
-    gap: 0.5rem;
+  .search-input {
+    width: 90%;
   }
 
   .filter-options {
-    gap: 0.5rem;
-  }
-
-  .job-card {
-    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 }

@@ -1,10 +1,10 @@
-// src/BerandaAdmin.js
 import React, { useState } from 'react';
 import './BerandaAdmin.css';
 import NavbarAdmin from '../components/NavbarAdmin';
 import FooterAdmin from '../components/FooterAdmin';
+import JobDetailAdmin from '../components/JobDetailAdmin';
 
-function BerandaAdmin({ uploadedJobs, setUploadedJobs }) {
+function BerandaAdmin({ uploadedJobs, setUploadedJobs, setPublishedJobs }) {
   const [selectedJob, setSelectedJob] = useState(null);
 
   const handleViewJob = (job) => {
@@ -12,20 +12,25 @@ function BerandaAdmin({ uploadedJobs, setUploadedJobs }) {
   };
 
   const handleAcceptJob = () => {
-    alert('Loker diterima!');
-    setSelectedJob(null);
+    // Tambahkan job ke PublishedJobs tanpa menghapus dari UploadedJobs
+    setPublishedJobs((prevJobs) => {
+      if (!prevJobs.some((job) => job === selectedJob)) {
+        return [...prevJobs, selectedJob];
+      }
+      return prevJobs;
+    });
+    alert('Loker diterima dan dipublikasikan!');
   };
 
-  const handleBanJob = () => {
-    alert('Loker dibanned!');
-    setSelectedJob(null);
-  };
-
-  const handleDeleteJob = (jobToDelete) => {
-    const updatedJobs = uploadedJobs.filter((job) => job !== jobToDelete);
+  const handleDeleteJob = () => {
+    const updatedJobs = uploadedJobs.filter((job) => job !== selectedJob);
     setUploadedJobs(updatedJobs);
-    alert('Loker berhasil dihapus!');
     setSelectedJob(null);
+    alert('Loker berhasil dihapus!');
+  };
+
+  const handleBack = () => {
+    setSelectedJob(null); // Kembali ke daftar pekerjaan
   };
 
   return (
@@ -44,26 +49,17 @@ function BerandaAdmin({ uploadedJobs, setUploadedJobs }) {
                   <p><strong>Gaji:</strong> {job.salary}</p>
                   <p><strong>Posisi:</strong> {job.potition}</p>
                   <button className="detail-button" onClick={() => handleViewJob(job)}>Lihat Detail</button>
-                  <button className="delete-button" onClick={() => handleDeleteJob(job)}>Hapus</button>
                 </div>
               ))
             )}
           </div>
         ) : (
-          <div className="job-details">
-            <h2>{selectedJob.company}</h2>
-            <p><strong>Posisi:</strong> {selectedJob.potition}</p>
-            <p><strong>Deskripsi:</strong> {selectedJob.description}</p>
-            <p><strong>Gaji:</strong> {selectedJob.salary}</p>
-            <p><strong>Sistem Kerja:</strong> {selectedJob.workSystem}</p>
-            <p><strong>Kualifikasi:</strong> {selectedJob.qualifications}</p>
-            <p><strong>Lokasi:</strong> {selectedJob.location}</p>
-            <div className="button-group">
-              <button className="accept-button" onClick={handleAcceptJob}>Terima</button>
-              <button className="ban-button" onClick={handleBanJob}>Ban</button>
-              <button className="delete-button" onClick={() => handleDeleteJob(selectedJob)}>Hapus</button>
-            </div>
-          </div>
+          <JobDetailAdmin
+            job={selectedJob}
+            onBack={handleBack}
+            onAccept={handleAcceptJob}
+            onDelete={handleDeleteJob}
+          />
         )}
       </div>
       <FooterAdmin />
