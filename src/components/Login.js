@@ -1,35 +1,39 @@
+// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../api';
 import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
+
+  // State untuk input dan error
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Data akun admin
-  const adminCredentials = {
-    email: 'admin@website.com',
-    password: 'admin123',
-  };
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
+    // Validasi wajib isi
     if (!email || !password) {
       setErrorMessage('Email dan Password wajib diisi!');
       return;
     }
 
-    // Validasi admin
-    if (email === adminCredentials.email && password === adminCredentials.password) {
-      setErrorMessage('');
-      navigate('./admin/pages/BerandaAdmin'); // Arahkan ke BerandaAdmin
-    } else {
-      // Validasi user biasa
-      setErrorMessage('');
-      navigate('/home');
+    try {
+      // Panggil API login
+      const response = await loginUser({ email, password });
+
+      // Jika berhasil, arahkan pengguna berdasarkan perannya
+      if (response.role === 'admin') {
+        navigate('/admin/pages/BerandaAdmin'); // Halaman admin
+      } else {
+        navigate('/home'); // Halaman user biasa
+      }
+    } catch (error) {
+      // Tangani error dari backend
+      setErrorMessage(error.message || 'Login gagal. Cek email dan password Anda.');
     }
   };
 
@@ -56,8 +60,10 @@ function Login() {
           />
         </div>
 
+        {/* Pesan Error */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
+        {/* Tombol Login dan Daftar */}
         <div className="button-group">
           <button type="submit" className="auth-btn">
             Login
