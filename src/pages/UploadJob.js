@@ -11,7 +11,7 @@ function UploadJob() {
     location: '',
     salary: '',
     description: '',
-    workSystem: '', // Baru: Menambahkan kolom workSystem
+    work_system: '', // Sesuaikan dengan backend
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +43,7 @@ function UploadJob() {
           location: '',
           salary: '',
           description: '',
-          workSystem: '', // Reset kolom workSystem
+          work_system: '', // Reset kolom work_system
         });
       } else {
         const errorData = await response.json();
@@ -131,13 +131,13 @@ function UploadJob() {
             />
           </div>
 
-          {/* Baru: Dropdown untuk workSystem */}
+          {/* Dropdown untuk work_system */}
           <div className="form-group">
-            <label htmlFor="workSystem">Sistem Kerja:</label>
+            <label htmlFor="work_system">Sistem Kerja:</label>
             <select
-              id="workSystem"
+              id="work_system"
               className="form-input"
-              value={formData.workSystem}
+              value={formData.work_system}
               onChange={handleChange}
               required
             >
