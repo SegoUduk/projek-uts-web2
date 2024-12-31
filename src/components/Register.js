@@ -33,7 +33,7 @@ function Register() {
     try {
       // Panggil fungsi API untuk register
       const response = await registerUser({ name, email, password });
-      
+
       // Jika berhasil, tampilkan pesan sukses dan arahkan ke halaman login
       setErrorMessage('');
       setSuccessMessage('Pendaftaran berhasil! Silakan login.');

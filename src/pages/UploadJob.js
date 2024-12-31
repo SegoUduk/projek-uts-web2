@@ -1,49 +1,65 @@
 import React, { useState } from 'react';
 import './UploadJob.css';
-import Navbar from '../components/Navbar'; // Pastikan path sesuai
-import Footer from '../components/Footer'; // Pastikan path sesuai
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-function UploadJob({ onJobUpload }) {
+function UploadJob() {
   const [formData, setFormData] = useState({
+    user_id: 1, // Ubah sesuai user ID dari backend atau token
+    title: '',
     company: '',
-    description: '',
-    position: '',
-    qualifications: '',
-    salary: '',
-    workSystem: '',
     location: '',
+    salary: '',
+    description: '',
+    workSystem: '', // Baru: Menambahkan kolom workSystem
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newJob = {
-      ...formData,
-      id: Date.now(),
-      status: 'Pending',
-      qualifications: formData.qualifications.split(',').map((q) => q.trim()),
-    };
-    onJobUpload(newJob); // Mengirim data ke komponen induk
-    alert('Lowongan kerja berhasil diupload!');
-    setFormData({
-      company: '',
-      description: '',
-      position: '',
-      qualifications: '',
-      salary: '',
-      workSystem: '',
-      location: '',
-    });
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/jobs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert('Lowongan kerja berhasil diunggah!');
+        setFormData({
+          user_id: 1, // Reset user_id
+          title: '',
+          company: '',
+          location: '',
+          salary: '',
+          description: '',
+          workSystem: '', // Reset kolom workSystem
+        });
+      } else {
+        const errorData = await response.json();
+        alert(`Gagal mengunggah lowongan: ${errorData.message}`);
+      }
+    } catch (error) {
+      console.error('Error saat mengunggah lowongan:', error);
+      alert('Terjadi kesalahan saat mengunggah lowongan kerja.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <div>
       <Navbar />
-      {/* Banner dengan gambar */}
       <div className="upload-job-banner">
         <img
           src="/gambar/gambar.jpg"
@@ -52,24 +68,35 @@ function UploadJob({ onJobUpload }) {
         />
       </div>
 
-      {/* Konten utama */}
       <div className="upload-job-content">
         <h2 className="form-title">Upload Lowongan Kerja</h2>
         <form className="upload-job-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="company">Nama Perusahaan:</label>
-            <textarea
-              id="company"
+            <label htmlFor="title">Judul Pekerjaan:</label>
+            <input
+              type="text"
+              id="title"
               className="form-input"
-              rows="2"
-              value={formData.company}
+              value={formData.title}
               onChange={handleChange}
               required
-            ></textarea>
+            />
           </div>
 
           <div className="form-group">
-            <label htmlFor="description">Deskripsi Perusahaan:</label>
+            <label htmlFor="company">Nama Perusahaan:</label>
+            <input
+              type="text"
+              id="company"
+              className="form-input"
+              value={formData.company}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="description">Deskripsi Pekerjaan:</label>
             <textarea
               id="description"
               className="form-input"
@@ -81,59 +108,7 @@ function UploadJob({ onJobUpload }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="position">Posisi:</label>
-            <textarea
-              id="position"
-              className="form-input"
-              rows="2"
-              value={formData.position}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="qualifications">Kualifikasi (pisahkan dengan koma):</label>
-            <textarea
-              id="qualifications"
-              className="form-input"
-              rows="3"
-              value={formData.qualifications}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="salary">Gaji:</label>
-            <input
-              type="text"
-              id="salary"
-              className="form-input"
-              value={formData.salary}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="workSystem">Sistem Kerja:</label>
-            <select
-              id="workSystem"
-              className="form-input"
-              value={formData.workSystem}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Pilih Sistem Kerja</option>
-              <option value="Fulltime">Full Time</option>
-              <option value="Part-time">Part Time</option>
-              <option value="Freelance">Freelance</option>
-            </select>
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="location">Alamat:</label>
+            <label htmlFor="location">Lokasi:</label>
             <input
               type="text"
               id="location"
@@ -144,7 +119,38 @@ function UploadJob({ onJobUpload }) {
             />
           </div>
 
-          <button type="submit" className="submit-button">Submit</button>
+          <div className="form-group">
+            <label htmlFor="salary">Gaji:</label>
+            <input
+              type="number"
+              id="salary"
+              className="form-input"
+              value={formData.salary}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Baru: Dropdown untuk workSystem */}
+          <div className="form-group">
+            <label htmlFor="workSystem">Sistem Kerja:</label>
+            <select
+              id="workSystem"
+              className="form-input"
+              value={formData.workSystem}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Pilih Sistem Kerja</option>
+              <option value="Full time">Full time</option>
+              <option value="Part time">Part time</option>
+              <option value="Freelance">Freelance</option>
+            </select>
+          </div>
+
+          <button type="submit" className="submit-button" disabled={isLoading}>
+            {isLoading ? 'Mengupload...' : 'Submit'}
+          </button>
         </form>
       </div>
       <Footer />
