@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-import { registerUser } from '../api';
+import axios from 'axios'; // Gunakan axios untuk integrasi API
 
 function Register() {
   const navigate = useNavigate();
@@ -31,16 +31,20 @@ function Register() {
     }
 
     try {
-      // Panggil fungsi API untuk register
-      const response = await registerUser({ name, email, password });
+      // Panggil API backend untuk register
+      const response = await axios.post('http://localhost:4000/api/users/register', {
+        name,
+        email,
+        password,
+      });
 
       // Jika berhasil, tampilkan pesan sukses dan arahkan ke halaman login
       setErrorMessage('');
       setSuccessMessage('Pendaftaran berhasil! Silakan login.');
-      setTimeout(() => navigate('../pages/'), 2000); // Navigasi ke halaman login setelah 2 detik
+      setTimeout(() => navigate('/login'), 2000); // Navigasi ke halaman login setelah 2 detik
     } catch (error) {
       // Tampilkan pesan error dari backend
-      setErrorMessage(error.message || 'Terjadi kesalahan saat mendaftar.');
+      setErrorMessage(error.response?.data?.message || 'Terjadi kesalahan saat mendaftar.');
     }
   };
 
@@ -99,7 +103,7 @@ function Register() {
           <button
             type="button"
             className="back-to-login-button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/login')}
           >
             Kembali
           </button>

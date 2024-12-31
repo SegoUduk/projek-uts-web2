@@ -1,13 +1,12 @@
-// src/Login.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '../api';
+import { loginUser } from '../api'; // Pastikan file API ini sudah benar
 import './Login.css';
 
 function Login() {
   const navigate = useNavigate();
 
-  // State untuk input dan error
+  // State untuk input dan pesan error
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,9 +14,9 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Validasi wajib isi
+    // Validasi input wajib diisi
     if (!email || !password) {
-      setErrorMessage('Email dan Password wajib diisi!');
+      setErrorMessage('Email dan password wajib diisi!');
       return;
     }
 
@@ -25,15 +24,21 @@ function Login() {
       // Panggil API login
       const response = await loginUser({ email, password });
 
-      // Jika berhasil, arahkan pengguna berdasarkan perannya
-      if (response.role === 'admin') {
-        navigate('/admin/pages/BerandaAdmin'); // Halaman admin
+      // Ambil peran user dari respons backend
+      const userRole = response.user.role;
+
+      if (userRole === 'admin') {
+        // Redirect ke dashboard admin
+        navigate('/admin/pages/BerandaAdmin');
       } else {
-        navigate('/home'); // Halaman user biasa
+        // Redirect ke halaman user biasa
+        navigate('/home');
       }
     } catch (error) {
       // Tangani error dari backend
-      setErrorMessage(error.message || 'Login gagal. Cek email dan password Anda.');
+      setErrorMessage(
+        error?.response?.data?.message || 'Login gagal. Cek email dan password Anda.'
+      );
     }
   };
 
@@ -41,6 +46,7 @@ function Login() {
     <div className="auth-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
+        {/* Input Email */}
         <div className="form-group">
           <label>Email</label>
           <input
@@ -50,6 +56,8 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
+        {/* Input Password */}
         <div className="form-group">
           <label>Password</label>
           <input
@@ -63,11 +71,13 @@ function Login() {
         {/* Pesan Error */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        {/* Tombol Login dan Daftar */}
+        {/* Tombol Login */}
         <div className="button-group">
           <button type="submit" className="auth-btn">
             Login
           </button>
+
+          {/* Tombol Daftar */}
           <button
             type="button"
             className="auth-btn"

@@ -34,6 +34,11 @@ export const updateUserProfile = async (id, data) => {
   return response.data;
 };
 
+export const deleteUser = async (id) => {
+  const response = await API.delete(`/users/${id}`);
+  return response.data;
+};
+
 // *** JOBS API ***
 export const getAllJobs = async () => {
   const response = await API.get('/jobs');
@@ -56,8 +61,8 @@ export const createJob = async (data) => {
   return response.data;
 };
 
-export const approveJob = async (id) => {
-  const response = await API.put(`/jobs/${id}/status`, { status: 'approved' });
+export const updateJobStatus = async (id, status) => {
+  const response = await API.put(`/jobs/${id}/status`, { status });
   return response.data;
 };
 
@@ -101,5 +106,10 @@ export const getPendingJobs = async () => {
 
 export const getApprovedJobs = async () => {
   const response = await API.get('/admin/approved-jobs');
+  return response.data;
+};
+
+export const deleteJob = async (id) => {
+  const response = await API.delete(`/jobs/${id}`);
   return response.data;
 };
