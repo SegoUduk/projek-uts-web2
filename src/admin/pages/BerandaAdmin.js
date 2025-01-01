@@ -3,22 +3,25 @@ import './BerandaAdmin.css';
 import NavbarAdmin from '../components/NavbarAdmin';
 import FooterAdmin from '../components/FooterAdmin';
 import JobDetailAdmin from '../components/JobDetailAdmin';
-import { getPendingJobs, updateJobStatus, deleteJob } from '../../api'; 
+import { getPendingJobs, updateJobStatus, deleteJob } from '../../api'; // Import API functions
 
 function BerandaAdmin({ setPublishedJobs }) {
   const [uploadedJobs, setUploadedJobs] = useState([]); // Jobs yang diunggah pengguna
   const [selectedJob, setSelectedJob] = useState(null); // Job yang dipilih untuk detail
   const [loading, setLoading] = useState(true); // State untuk menandakan loading
+  const [error, setError] = useState(null); // State untuk menyimpan error jika ada
 
   // Mendapatkan data job yang belum disetujui
   useEffect(() => {
     const fetchPendingJobs = async () => {
       try {
         setLoading(true);
-        const data = await getPendingJobs(); // API untuk mendapatkan pending jobs
-        setUploadedJobs(data);
-      } catch (error) {
-        console.error('Error fetching pending jobs:', error);
+        setError(null); // Reset error saat mulai loading
+        const response = await getPendingJobs(); // API untuk mendapatkan pending jobs
+        setUploadedJobs(response.data); // Pastikan struktur API cocok dengan backend
+      } catch (err) {
+        console.error('Error fetching pending jobs:', err);
+        setError('Gagal memuat data loker. Silakan coba lagi nanti.');
       } finally {
         setLoading(false);
       }
@@ -46,6 +49,20 @@ function BerandaAdmin({ setPublishedJobs }) {
     }
   };
 
+  const handleRejectJob = async () => {
+    try {
+      await updateJobStatus(selectedJob.id, 'rejected'); // Update status menjadi "rejected"
+      setUploadedJobs((prevJobs) =>
+        prevJobs.filter((job) => job.id !== selectedJob.id)
+      ); // Hapus dari pending jobs
+      alert('Loker berhasil ditolak!');
+      setSelectedJob(null); // Kembali ke daftar pekerjaan
+    } catch (error) {
+      console.error('Error rejecting job:', error);
+      alert('Gagal menolak loker. Silakan coba lagi.');
+    }
+  };
+
   const handleDeleteJob = async () => {
     try {
       await deleteJob(selectedJob.id); // Hapus job dari backend
@@ -70,6 +87,8 @@ function BerandaAdmin({ setPublishedJobs }) {
       <div className="content">
         {loading ? (
           <p className="loading-message">Memuat data loker...</p>
+        ) : error ? (
+          <p className="error-message">{error}</p>
         ) : !selectedJob ? (
           <div className="job-list">
             {uploadedJobs.length === 0 ? (
@@ -77,15 +96,15 @@ function BerandaAdmin({ setPublishedJobs }) {
             ) : (
               uploadedJobs.map((job) => (
                 <div key={job.id} className="job-card">
-                  <h3>{job.company}</h3>
+                  <h3>{job.title}</h3>
+                  <p>
+                    <strong>Perusahaan:</strong> {job.company}
+                  </p>
                   <p>
                     <strong>Lokasi:</strong> {job.location}
                   </p>
                   <p>
                     <strong>Gaji:</strong> {job.salary}
-                  </p>
-                  <p>
-                    <strong>Posisi:</strong> {job.position}
                   </p>
                   <button
                     className="detail-button"
@@ -102,6 +121,7 @@ function BerandaAdmin({ setPublishedJobs }) {
             job={selectedJob}
             onBack={handleBack}
             onAccept={handleAcceptJob}
+            onReject={handleRejectJob}
             onDelete={handleDeleteJob}
           />
         )}

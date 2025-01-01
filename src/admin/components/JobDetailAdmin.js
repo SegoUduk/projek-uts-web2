@@ -1,7 +1,7 @@
 import React from 'react';
 import './JobDetailAdmin.css';
 
-function JobDetailAdmin({ job, onBack, onAccept, onDelete }) {
+function JobDetailAdmin({ job, onBack, onAccept, onReject, onDelete }) {
   return (
     <div className="job-detail-admin">
       <h2>Detail Lowongan Kerja</h2>
@@ -15,20 +15,29 @@ function JobDetailAdmin({ job, onBack, onAccept, onDelete }) {
         <strong>Gaji:</strong> {job.salary}
       </p>
       <p>
-        <strong>Posisi:</strong> {job.position}
+        <strong>Posisi:</strong> {job.title}
       </p>
       <p>
         <strong>Deskripsi:</strong> {job.description}
+      </p>
+      <p>
+        <strong>Sistem Kerja:</strong> {job.work_system}
+      </p>
+      <p>
+        <strong>Status:</strong> {job.status}
       </p>
       <div className="actions">
         <button className="accept-button" onClick={onAccept}>
           Terima Lowongan
         </button>
+        <button className="reject-button" onClick={onReject}>
+          Tolak Lowongan
+        </button>
         <button className="delete-button" onClick={onDelete}>
-          Tolak / Hapus
+          Hapus Lowongan
         </button>
         <button className="back-button" onClick={onBack}>
-          Kembali
+          Kembali ke Daftar
         </button>
       </div>
     </div>
