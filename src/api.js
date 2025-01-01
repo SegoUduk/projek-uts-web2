@@ -185,7 +185,7 @@ export const markNotificationAsRead = async (id) => {
 export const getPendingJobs = async () => {
   try {
     const response = await API.get('/admin/pending-jobs');
-    return response.data; // Pastikan data jobs ada di response.data
+    return response.data;
   } catch (error) {
     handleError(error);
   }

@@ -3,25 +3,23 @@ import './BerandaAdmin.css';
 import NavbarAdmin from '../components/NavbarAdmin';
 import FooterAdmin from '../components/FooterAdmin';
 import JobDetailAdmin from '../components/JobDetailAdmin';
-import { getPendingJobs, updateJobStatus, deleteJob } from '../../api'; // Import API functions
+import { getPendingJobs, updateJobStatus, deleteJob } from '../../api';
 
-function BerandaAdmin({ setPublishedJobs }) {
-  const [uploadedJobs, setUploadedJobs] = useState([]); // Jobs yang diunggah pengguna
-  const [selectedJob, setSelectedJob] = useState(null); // Job yang dipilih untuk detail
-  const [loading, setLoading] = useState(true); // State untuk menandakan loading
-  const [error, setError] = useState(null); // State untuk menyimpan error jika ada
+function BerandaAdmin() {
+  const [pendingJobs, setPendingJobs] = useState([]); // State untuk daftar pekerjaan pending
+  const [selectedJob, setSelectedJob] = useState(null); // Job yang sedang dipilih
+  const [loading, setLoading] = useState(true); // State loading
+  const [error, setError] = useState(null); // State untuk error
 
-  // Mendapatkan data job yang belum disetujui
   useEffect(() => {
+    // Mendapatkan pekerjaan pending dari API
     const fetchPendingJobs = async () => {
       try {
         setLoading(true);
-        setError(null); // Reset error saat mulai loading
-        const response = await getPendingJobs(); // API untuk mendapatkan pending jobs
-        setUploadedJobs(response.data); // Pastikan struktur API cocok dengan backend
+        const jobs = await getPendingJobs();
+        setPendingJobs(jobs); // Mengisi state dengan data jobs
       } catch (err) {
-        console.error('Error fetching pending jobs:', err);
-        setError('Gagal memuat data loker. Silakan coba lagi nanti.');
+        setError(err.message || 'Gagal memuat data pekerjaan.');
       } finally {
         setLoading(false);
       }
@@ -30,55 +28,37 @@ function BerandaAdmin({ setPublishedJobs }) {
     fetchPendingJobs();
   }, []);
 
-  const handleViewJob = (job) => {
-    setSelectedJob(job);
-  };
-
   const handleAcceptJob = async () => {
     try {
-      await updateJobStatus(selectedJob.id, 'approved'); // Update status menjadi "approved"
-      setPublishedJobs((prevJobs) => [...prevJobs, selectedJob]); // Tambahkan ke jobs yang disetujui
-      setUploadedJobs((prevJobs) =>
-        prevJobs.filter((job) => job.id !== selectedJob.id)
-      ); // Hapus dari pending jobs
-      alert('Loker berhasil diterima dan dipublikasikan!');
-      setSelectedJob(null); // Kembali ke daftar pekerjaan
-    } catch (error) {
-      console.error('Error approving job:', error);
-      alert('Gagal menyetujui loker. Silakan coba lagi.');
+      await updateJobStatus(selectedJob.id, 'approved');
+      setPendingJobs((prev) => prev.filter((job) => job.id !== selectedJob.id));
+      alert('Pekerjaan berhasil disetujui.');
+      setSelectedJob(null);
+    } catch (err) {
+      alert(err.message || 'Gagal menyetujui pekerjaan.');
     }
   };
 
   const handleRejectJob = async () => {
     try {
-      await updateJobStatus(selectedJob.id, 'rejected'); // Update status menjadi "rejected"
-      setUploadedJobs((prevJobs) =>
-        prevJobs.filter((job) => job.id !== selectedJob.id)
-      ); // Hapus dari pending jobs
-      alert('Loker berhasil ditolak!');
-      setSelectedJob(null); // Kembali ke daftar pekerjaan
-    } catch (error) {
-      console.error('Error rejecting job:', error);
-      alert('Gagal menolak loker. Silakan coba lagi.');
+      await updateJobStatus(selectedJob.id, 'rejected');
+      setPendingJobs((prev) => prev.filter((job) => job.id !== selectedJob.id));
+      alert('Pekerjaan berhasil ditolak.');
+      setSelectedJob(null);
+    } catch (err) {
+      alert(err.message || 'Gagal menolak pekerjaan.');
     }
   };
 
   const handleDeleteJob = async () => {
     try {
-      await deleteJob(selectedJob.id); // Hapus job dari backend
-      setUploadedJobs((prevJobs) =>
-        prevJobs.filter((job) => job.id !== selectedJob.id)
-      ); // Hapus dari pending jobs
-      alert('Loker berhasil dihapus!');
-      setSelectedJob(null); // Kembali ke daftar pekerjaan
-    } catch (error) {
-      console.error('Error deleting job:', error);
-      alert('Gagal menghapus loker. Silakan coba lagi.');
+      await deleteJob(selectedJob.id);
+      setPendingJobs((prev) => prev.filter((job) => job.id !== selectedJob.id));
+      alert('Pekerjaan berhasil dihapus.');
+      setSelectedJob(null);
+    } catch (err) {
+      alert(err.message || 'Gagal menghapus pekerjaan.');
     }
-  };
-
-  const handleBack = () => {
-    setSelectedJob(null); // Kembali ke daftar pekerjaan
   };
 
   return (
@@ -86,44 +66,31 @@ function BerandaAdmin({ setPublishedJobs }) {
       <NavbarAdmin />
       <div className="content">
         {loading ? (
-          <p className="loading-message">Memuat data loker...</p>
+          <p>Memuat data...</p>
         ) : error ? (
-          <p className="error-message">{error}</p>
-        ) : !selectedJob ? (
-          <div className="job-list">
-            {uploadedJobs.length === 0 ? (
-              <p className="empty-message">Tidak ada loker yang tersedia.</p>
-            ) : (
-              uploadedJobs.map((job) => (
-                <div key={job.id} className="job-card">
-                  <h3>{job.title}</h3>
-                  <p>
-                    <strong>Perusahaan:</strong> {job.company}
-                  </p>
-                  <p>
-                    <strong>Lokasi:</strong> {job.location}
-                  </p>
-                  <p>
-                    <strong>Gaji:</strong> {job.salary}
-                  </p>
-                  <button
-                    className="detail-button"
-                    onClick={() => handleViewJob(job)}
-                  >
-                    Lihat Detail
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        ) : (
+          <p>{error}</p>
+        ) : selectedJob ? (
           <JobDetailAdmin
             job={selectedJob}
-            onBack={handleBack}
+            onBack={() => setSelectedJob(null)}
             onAccept={handleAcceptJob}
             onReject={handleRejectJob}
             onDelete={handleDeleteJob}
           />
+        ) : (
+          <div className="job-list">
+            {pendingJobs.length === 0 ? (
+              <p>Tidak ada pekerjaan yang menunggu persetujuan.</p>
+            ) : (
+              pendingJobs.map((job) => (
+                <div key={job.id} className="job-card">
+                  <h3>{job.title}</h3>
+                  <p>{job.company}</p>
+                  <button onClick={() => setSelectedJob(job)}>Detail</button>
+                </div>
+              ))
+            )}
+          </div>
         )}
       </div>
       <FooterAdmin />
