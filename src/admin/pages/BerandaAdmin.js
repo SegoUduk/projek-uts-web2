@@ -3,31 +3,31 @@ import './BerandaAdmin.css';
 import NavbarAdmin from '../components/NavbarAdmin';
 import FooterAdmin from '../components/FooterAdmin';
 import JobDetailAdmin from '../components/JobDetailAdmin';
-import { getPendingJobs, updateJobStatus, deleteJob } from '../../api';
+import { getPendingJobs, updateJobStatus, deleteJobAsAdmin } from '../../api';
 
 function BerandaAdmin() {
-  const [pendingJobs, setPendingJobs] = useState([]); // State untuk daftar pekerjaan pending
-  const [selectedJob, setSelectedJob] = useState(null); // Job yang sedang dipilih
-  const [loading, setLoading] = useState(true); // State loading
-  const [error, setError] = useState(null); // State untuk error
+  const [pendingJobs, setPendingJobs] = useState([]); // Daftar pekerjaan pending
+  const [selectedJob, setSelectedJob] = useState(null); // Pekerjaan yang dipilih
+  const [loading, setLoading] = useState(true); // Indikator loading
+  const [error, setError] = useState(null); // Pesan error
 
+  // Mendapatkan daftar pekerjaan pending dari API saat komponen di-mount
   useEffect(() => {
-    // Mendapatkan pekerjaan pending dari API
-    const fetchPendingJobs = async () => {
+    const fetchJobs = async () => {
       try {
         setLoading(true);
         const jobs = await getPendingJobs();
-        setPendingJobs(jobs); // Mengisi state dengan data jobs
+        setPendingJobs(jobs);
       } catch (err) {
-        setError(err.message || 'Gagal memuat data pekerjaan.');
+        setError(err || 'Gagal memuat data pekerjaan.');
       } finally {
         setLoading(false);
       }
     };
-
-    fetchPendingJobs();
+    fetchJobs();
   }, []);
 
+  // Menyetujui pekerjaan
   const handleAcceptJob = async () => {
     try {
       await updateJobStatus(selectedJob.id, 'approved');
@@ -35,10 +35,11 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil disetujui.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err.message || 'Gagal menyetujui pekerjaan.');
+      alert(err || 'Gagal menyetujui pekerjaan.');
     }
   };
 
+  // Menolak pekerjaan
   const handleRejectJob = async () => {
     try {
       await updateJobStatus(selectedJob.id, 'rejected');
@@ -46,18 +47,19 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil ditolak.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err.message || 'Gagal menolak pekerjaan.');
+      alert(err || 'Gagal menolak pekerjaan.');
     }
   };
 
+  // Menghapus pekerjaan
   const handleDeleteJob = async () => {
     try {
-      await deleteJob(selectedJob.id);
+      await deleteJobAsAdmin(selectedJob.id);
       setPendingJobs((prev) => prev.filter((job) => job.id !== selectedJob.id));
       alert('Pekerjaan berhasil dihapus.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err.message || 'Gagal menghapus pekerjaan.');
+      alert(err || 'Gagal menghapus pekerjaan.');
     }
   };
 
