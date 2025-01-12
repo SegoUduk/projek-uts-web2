@@ -6,12 +6,11 @@ import JobDetailAdmin from '../components/JobDetailAdmin';
 import { getPendingJobs, updateJobStatus, deleteJobAsAdmin } from '../../api';
 
 function BerandaAdmin() {
-  const [pendingJobs, setPendingJobs] = useState([]); // Daftar pekerjaan pending
-  const [selectedJob, setSelectedJob] = useState(null); // Pekerjaan yang dipilih
-  const [loading, setLoading] = useState(true); // Indikator loading
-  const [error, setError] = useState(null); // Pesan error
+  const [pendingJobs, setPendingJobs] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Mendapatkan daftar pekerjaan pending dari API saat komponen di-mount
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -19,7 +18,7 @@ function BerandaAdmin() {
         const jobs = await getPendingJobs();
         setPendingJobs(jobs);
       } catch (err) {
-        setError(err || 'Gagal memuat data pekerjaan.');
+        setError(err.message || 'Gagal memuat data pekerjaan.');
       } finally {
         setLoading(false);
       }
@@ -27,7 +26,6 @@ function BerandaAdmin() {
     fetchJobs();
   }, []);
 
-  // Menyetujui pekerjaan
   const handleAcceptJob = async () => {
     try {
       await updateJobStatus(selectedJob.id, 'approved');
@@ -35,11 +33,10 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil disetujui.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err || 'Gagal menyetujui pekerjaan.');
+      alert('Gagal menyetujui pekerjaan.');
     }
   };
 
-  // Menolak pekerjaan
   const handleRejectJob = async () => {
     try {
       await updateJobStatus(selectedJob.id, 'rejected');
@@ -47,11 +44,10 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil ditolak.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err || 'Gagal menolak pekerjaan.');
+      alert('Gagal menolak pekerjaan.');
     }
   };
 
-  // Menghapus pekerjaan
   const handleDeleteJob = async () => {
     try {
       await deleteJobAsAdmin(selectedJob.id);
@@ -59,7 +55,7 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil dihapus.');
       setSelectedJob(null);
     } catch (err) {
-      alert(err || 'Gagal menghapus pekerjaan.');
+      alert('Gagal menghapus pekerjaan.');
     }
   };
 

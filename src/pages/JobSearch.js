@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './JobSearch.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import JobDetail from '../components/JobDetail';
+import { getApprovedJobs } from '../api'; // Pastikan API ini tersedia
 
-const JobSearch = ({ publishedJobs }) => {
-  const [selectedJob, setSelectedJob] = useState(null);
-  const [searchKeyword, setSearchKeyword] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('');
-  const [selectedJobType, setSelectedJobType] = useState('');
-  const [selectedWorkSystem, setSelectedWorkSystem] = useState('');
+const JobSearch = () => {
+  const [approvedJobs, setApprovedJobs] = useState([]); // State untuk pekerjaan yang disetujui
+  const [selectedJob, setSelectedJob] = useState(null); // State untuk pekerjaan yang dipilih
+  const [searchKeyword, setSearchKeyword] = useState(''); // Kata kunci pencarian
+  const [selectedLocation, setSelectedLocation] = useState(''); // Lokasi filter
+  const [selectedJobType, setSelectedJobType] = useState(''); // Jenis pekerjaan filter
+  const [selectedWorkSystem, setSelectedWorkSystem] = useState(''); // Sistem kerja filter
+  const [isLoading, setIsLoading] = useState(true); // State loading
+  const [error, setError] = useState(null); // State error
 
-  // Filter pekerjaan berdasarkan input pencarian
-  const filteredJobs = publishedJobs.filter((job) => {
+  // Mengambil data pekerjaan yang disetujui dari API
+  useEffect(() => {
+    const fetchApprovedJobs = async () => {
+      try {
+        setIsLoading(true); // Mulai loading
+        const jobs = await getApprovedJobs(); // Memanggil API
+        setApprovedJobs(jobs); // Menyimpan data ke state
+        setIsLoading(false); // Selesai loading
+      } catch (err) {
+        setError('Gagal memuat data pekerjaan.'); // Menangani error
+        setIsLoading(false); // Matikan loading
+      }
+    };
+
+    fetchApprovedJobs();
+  }, []);
+
+  // Filter pekerjaan berdasarkan input pencarian dan filter
+  const filteredJobs = approvedJobs.filter((job) => {
     return (
       (searchKeyword === '' || job.title.toLowerCase().includes(searchKeyword.toLowerCase())) &&
       (selectedLocation === '' || job.location === selectedLocation) &&
@@ -25,6 +46,7 @@ const JobSearch = ({ publishedJobs }) => {
     <div className="job-search-page">
       <Navbar />
 
+      {/* Banner */}
       <div className="upload-job-banner">
         <img
           src="/gambar/gambar.jpg"
@@ -32,11 +54,12 @@ const JobSearch = ({ publishedJobs }) => {
           className="banner-image"
         />
       </div>
-      
+
+      {/* Konten pencarian pekerjaan */}
       <div className="job-search-content">
         <h2 className="search-title">Cari Lowongan Kerja</h2>
 
-        {/* Search and Filter */}
+        {/* Search dan Filter */}
         <div className="search-filter-container">
           <input
             type="text"
@@ -82,40 +105,43 @@ const JobSearch = ({ publishedJobs }) => {
           </div>
         </div>
 
-        {/* Job List */}
+        {/* Daftar Pekerjaan */}
         <div className="job-search-container">
-          <div className="job-list-container">
-            {filteredJobs.length > 0 ? (
-              filteredJobs.map((job, index) => (
-                <div
-                  key={index}
-                  className="job-card"
-                  onClick={() => setSelectedJob(job)} // Klik untuk memilih pekerjaan
-                >
-                  <h3>{job.title}</h3>
-                  <p><strong>Perusahaan:</strong> {job.company}</p>
-                  <p><strong>Lokasi:</strong> {job.location}</p>
-                  <p><strong>Sistem Kerja:</strong> {job.workSystem}</p>
-                </div>
-              ))
-            ) : (
-              <p className="no-jobs-message">Tidak ada lowongan kerja yang ditemukan.</p>
-            )}
-          </div>
-
-          {/* Job Detail */}
-          {selectedJob && (
-            <div className="job-detail-overlay">
-              <div className="job-detail-container">
-                <JobDetail
-                  job={selectedJob}
-                  onClose={() => setSelectedJob(null)} // Tutup detail
-                />
+          {isLoading ? ( // Tampilkan loading jika data belum selesai di-load
+            <p className="loading-message">Memuat data pekerjaan...</p>
+          ) : error ? ( // Tampilkan pesan error jika ada masalah
+            <p className="error-message">{error}</p>
+          ) : filteredJobs.length > 0 ? (
+            filteredJobs.map((job, index) => (
+              <div
+                key={index}
+                className="job-card"
+                onClick={() => setSelectedJob(job)} // Klik untuk memilih pekerjaan
+              >
+                <h3>{job.title}</h3>
+                <p><strong>Perusahaan:</strong> {job.company}</p>
+                <p><strong>Lokasi:</strong> {job.location}</p>
+                <p><strong>Sistem Kerja:</strong> {job.workSystem}</p>
               </div>
-            </div>
+            ))
+          ) : (
+            <p className="no-jobs-message">Tidak ada lowongan kerja yang ditemukan.</p>
           )}
         </div>
+
+        {/* Detail Pekerjaan */}
+        {selectedJob && (
+          <div className="job-detail-overlay">
+            <div className="job-detail-container">
+              <JobDetail
+                job={selectedJob}
+                onClose={() => setSelectedJob(null)} // Tutup detail
+              />
+            </div>
+          </div>
+        )}
       </div>
+
       <Footer />
     </div>
   );

@@ -10,11 +10,13 @@ const API = axios.create({
 
 // Fungsi untuk menangani error
 const handleError = (error) => {
-  console.error('API Error:', error.message);
+  console.error('API Error:', error.message); // Log error di console
   throw error.response?.data?.message || 'Terjadi kesalahan pada API';
 };
 
-// *** USER API ***
+/* ================= USER API ================= */
+
+// Mengambil semua data pengguna
 export const getAllUsers = async () => {
   try {
     const response = await API.get('/users');
@@ -24,6 +26,7 @@ export const getAllUsers = async () => {
   }
 };
 
+// Mengambil data pengguna berdasarkan ID
 export const getUserById = async (id) => {
   try {
     const response = await API.get(`/users/${id}`);
@@ -33,6 +36,7 @@ export const getUserById = async (id) => {
   }
 };
 
+// Registrasi pengguna baru
 export const registerUser = async (data) => {
   try {
     const response = await API.post('/users', data);
@@ -42,6 +46,7 @@ export const registerUser = async (data) => {
   }
 };
 
+// Login pengguna
 export const loginUser = async (data) => {
   try {
     const response = await API.post('/users/login', data);
@@ -51,6 +56,7 @@ export const loginUser = async (data) => {
   }
 };
 
+// Mengupdate profil pengguna
 export const updateUserProfile = async (id, data) => {
   try {
     const response = await API.put(`/users/${id}`, data);
@@ -60,6 +66,7 @@ export const updateUserProfile = async (id, data) => {
   }
 };
 
+// Menghapus pengguna berdasarkan ID
 export const deleteUser = async (id) => {
   try {
     const response = await API.delete(`/users/${id}`);
@@ -69,7 +76,9 @@ export const deleteUser = async (id) => {
   }
 };
 
-// *** JOBS API ***
+/* ================= JOBS API ================= */
+
+// Mengambil semua pekerjaan
 export const getAllJobs = async () => {
   try {
     const response = await API.get('/jobs');
@@ -79,6 +88,7 @@ export const getAllJobs = async () => {
   }
 };
 
+// Mengambil detail pekerjaan berdasarkan ID
 export const getJobById = async (id) => {
   try {
     const response = await API.get(`/jobs/${id}`);
@@ -88,6 +98,7 @@ export const getJobById = async (id) => {
   }
 };
 
+// Mencari pekerjaan berdasarkan filter
 export const searchJobs = async (filters) => {
   try {
     const params = new URLSearchParams(filters);
@@ -98,6 +109,7 @@ export const searchJobs = async (filters) => {
   }
 };
 
+// Membuat pekerjaan baru
 export const createJob = async (data) => {
   try {
     const response = await API.post('/jobs', data);
@@ -107,6 +119,7 @@ export const createJob = async (data) => {
   }
 };
 
+// Mengupdate status pekerjaan (contoh: approved, rejected)
 export const updateJobStatus = async (id, status) => {
   try {
     const response = await API.put(`/jobs/${id}/status`, { status });
@@ -116,6 +129,7 @@ export const updateJobStatus = async (id, status) => {
   }
 };
 
+// Menghapus pekerjaan berdasarkan ID
 export const deleteJob = async (id) => {
   try {
     const response = await API.delete(`/jobs/${id}`);
@@ -125,7 +139,9 @@ export const deleteJob = async (id) => {
   }
 };
 
-// *** APPLICATIONS API ***
+/* ================= APPLICATIONS API ================= */
+
+// Mengambil daftar aplikasi berdasarkan ID pekerjaan
 export const getApplicationsByJob = async (jobId) => {
   try {
     const response = await API.get(`/applications/job/${jobId}`);
@@ -135,6 +151,7 @@ export const getApplicationsByJob = async (jobId) => {
   }
 };
 
+// Membuat aplikasi baru untuk pekerjaan
 export const createApplication = async (data) => {
   try {
     const response = await API.post('/applications', data);
@@ -144,6 +161,7 @@ export const createApplication = async (data) => {
   }
 };
 
+// Mengupdate status aplikasi pekerjaan
 export const updateApplicationStatus = async (id, status) => {
   try {
     const response = await API.put(`/applications/${id}/status`, { status });
@@ -153,7 +171,9 @@ export const updateApplicationStatus = async (id, status) => {
   }
 };
 
-// *** NOTIFICATIONS API ***
+/* ================= NOTIFICATIONS API ================= */
+
+// Mengambil daftar notifikasi berdasarkan ID pengguna
 export const getNotificationsByUser = async (userId) => {
   try {
     const response = await API.get(`/notifications/user/${userId}`);
@@ -163,6 +183,7 @@ export const getNotificationsByUser = async (userId) => {
   }
 };
 
+// Membuat notifikasi baru
 export const createNotification = async (data) => {
   try {
     const response = await API.post('/notifications', data);
@@ -172,6 +193,7 @@ export const createNotification = async (data) => {
   }
 };
 
+// Menandai notifikasi sebagai sudah dibaca
 export const markNotificationAsRead = async (id) => {
   try {
     const response = await API.put(`/notifications/${id}/read`);
@@ -181,7 +203,9 @@ export const markNotificationAsRead = async (id) => {
   }
 };
 
-// *** ADMIN-SPECIFIC API ***
+/* ================= ADMIN-SPECIFIC API ================= */
+
+// Mengambil daftar pekerjaan yang menunggu persetujuan
 export const getPendingJobs = async () => {
   try {
     const response = await API.get('/admin/pending-jobs');
@@ -191,6 +215,7 @@ export const getPendingJobs = async () => {
   }
 };
 
+// Mengambil daftar pekerjaan yang sudah disetujui
 export const getApprovedJobs = async () => {
   try {
     const response = await API.get('/admin/approved-jobs');
@@ -200,6 +225,7 @@ export const getApprovedJobs = async () => {
   }
 };
 
+// Menghapus pekerjaan sebagai admin
 export const deleteJobAsAdmin = async (id) => {
   try {
     const response = await API.delete(`/admin/jobs/${id}`);

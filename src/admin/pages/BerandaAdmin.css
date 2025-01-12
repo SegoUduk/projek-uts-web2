@@ -1,41 +1,110 @@
+/* BerandaAdmin CSS */
 .beranda-admin {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  font-family: Arial, sans-serif;
 }
 
 .content {
-  flex: 1;
-  padding: 20px;
+  padding: 2rem;
 }
 
 .job-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 .job-card {
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  width: 250px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  width: 280px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.job-card:hover {
+  transform: scale(1.05);
 }
 
 .job-card h3 {
-  margin: 0 0 10px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.job-card button {
-  background-color: #007bff;
-  color: white;
+.job-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.job-details {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.job-details h2 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+}
+
+.job-details p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.job-details ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.button-group {
+  margin-top: 2rem;
+}
+
+.accept-btn,
+.ban-btn {
+  padding: 0.7rem 1.5rem;
+  font-size: 16px;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
   cursor: pointer;
+  border-radius: 5px;
+  margin-right: 1rem;
+  transition: background-color 0.3s ease;
 }
 
-.job-card button:hover {
-  background-color: #0056b3;
+.accept-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.accept-btn:hover {
+  background-color: #218838;
+}
+
+.ban-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.ban-btn:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .job-list {
+    justify-content: center;
+  }
+
+  .job-card {
+    width: 100%;
+  }
+
+  .job-details {
+    padding: 1rem;
+  }
 }
