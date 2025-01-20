@@ -24,6 +24,9 @@ function Login() {
       // Panggil API login
       const response = await loginUser({ email, password });
 
+      // Logging respons untuk debugging
+      console.log('Login response:', response);
+
       // Ambil peran user dari respons backend
       const userRole = response.user.role;
 
@@ -36,6 +39,7 @@ function Login() {
       }
     } catch (error) {
       // Tangani error dari backend
+      console.error('Login error:', error);
       setErrorMessage(
         error?.response?.data?.message || 'Login gagal. Cek email dan password Anda.'
       );

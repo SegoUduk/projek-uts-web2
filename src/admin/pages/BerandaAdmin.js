@@ -18,6 +18,7 @@ function BerandaAdmin() {
         const jobs = await getPendingJobs();
         setPendingJobs(jobs);
       } catch (err) {
+        console.error('Error fetching jobs:', err);
         setError(err.message || 'Gagal memuat data pekerjaan.');
       } finally {
         setLoading(false);
@@ -33,6 +34,7 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil disetujui.');
       setSelectedJob(null);
     } catch (err) {
+      console.error('Error approving job:', err);
       alert('Gagal menyetujui pekerjaan.');
     }
   };
@@ -44,6 +46,7 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil ditolak.');
       setSelectedJob(null);
     } catch (err) {
+      console.error('Error rejecting job:', err);
       alert('Gagal menolak pekerjaan.');
     }
   };
@@ -55,6 +58,7 @@ function BerandaAdmin() {
       alert('Pekerjaan berhasil dihapus.');
       setSelectedJob(null);
     } catch (err) {
+      console.error('Error deleting job:', err);
       alert('Gagal menghapus pekerjaan.');
     }
   };

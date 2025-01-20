@@ -64,7 +64,7 @@ function App() {
 
           {/* Halaman Admin */}
           <Route
-            path="/admin/beranda"
+            path="/admin/pages/BerandaAdmin"
             element={
               <BerandaAdmin
                 uploadedJobs={uploadedJobs}
@@ -75,7 +75,7 @@ function App() {
             }
           />
           <Route
-            path="/admin/list"
+            path="/admin/pages/ListPage"
             element={
               <ListPage publishedJobs={publishedJobs} bannedJobs={bannedJobs} />
             }
