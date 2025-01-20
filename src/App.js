@@ -37,6 +37,11 @@ function App() {
     setUploadedJobs((prevJobs) => [...prevJobs, jobData]);
   };
 
+  // Fungsi untuk menangani pekerjaan yang dibanned
+  const handleJobBan = (jobId) => {
+    setBannedJobs((prevJobs) => [...prevJobs, jobId]);
+  };
+
   return (
     <Router>
       <div>
@@ -59,17 +64,18 @@ function App() {
 
           {/* Halaman Admin */}
           <Route
-            path="/admin/pages/BerandaAdmin"
+            path="/admin/beranda"
             element={
               <BerandaAdmin
                 uploadedJobs={uploadedJobs}
                 setUploadedJobs={setUploadedJobs}
                 setPublishedJobs={setPublishedJobs}
+                handleJobBan={handleJobBan} // Tambahkan fungsi handleJobBan
               />
             }
           />
           <Route
-            path="/admin/pages/ListPage"
+            path="/admin/list"
             element={
               <ListPage publishedJobs={publishedJobs} bannedJobs={bannedJobs} />
             }

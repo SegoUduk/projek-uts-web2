@@ -30,7 +30,9 @@ function FormApplication({ onApply }) {
   const handleConfirm = () => {
     setShowConfirmation(false);
     alert('Lamaran pekerjaan telah dikirim!');
-    onApply(formData); // Kirim data pelamar ke halaman HistoryUploadJobs
+    if (onApply) {
+      onApply(formData); // Kirim data pelamar ke halaman HistoryUploadJobs
+    }
     navigate('/jobsearch');
   };
 

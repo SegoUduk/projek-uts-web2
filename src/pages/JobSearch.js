@@ -32,6 +32,11 @@ const JobSearch = () => {
     fetchApprovedJobs();
   }, []);
 
+  const handleApply = (formData) => {
+    // Logika untuk menangani aplikasi pekerjaan
+    console.log('Applying for job with data:', formData);
+  };
+
   // Filter pekerjaan berdasarkan input pencarian dan filter
   const filteredJobs = approvedJobs.filter((job) => {
     return (
@@ -136,6 +141,7 @@ const JobSearch = () => {
               <JobDetail
                 job={selectedJob}
                 onClose={() => setSelectedJob(null)} // Tutup detail
+                onApply={handleApply} // Tambahkan onApply
               />
             </div>
           </div>

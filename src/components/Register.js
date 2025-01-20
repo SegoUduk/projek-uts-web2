@@ -1,4 +1,3 @@
-// src/Register.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
@@ -38,13 +37,30 @@ function Register() {
         password,
       });
 
+      // Logging respons untuk debugging
+      console.log('Response:', response);
+
       // Jika berhasil, tampilkan pesan sukses dan arahkan ke halaman login
-      setErrorMessage('');
-      setSuccessMessage('Pendaftaran berhasil! Silakan login.');
-      setTimeout(() => navigate('/login'), 2000); // Navigasi ke halaman login setelah 2 detik
+      if (response.status === 200 || response.status === 201) {
+        setErrorMessage('');
+        setSuccessMessage('Pendaftaran berhasil! Silakan login.');
+        setTimeout(() => navigate('/login'), 2000); // Navigasi ke halaman login setelah 2 detik
+      } else {
+        setErrorMessage('Gagal mendaftarkan pengguna.');
+      }
     } catch (error) {
       // Tampilkan pesan error dari backend
-      setErrorMessage(error.response?.data?.message || 'Terjadi kesalahan saat mendaftar.');
+      console.error('Error during registration:', error); // Tambahkan logging
+      if (error.response) {
+        // Kesalahan dari server
+        setErrorMessage(error.response.data.message || 'Terjadi kesalahan pada server!');
+      } else if (error.request) {
+        // Permintaan dibuat tetapi tidak ada respons
+        setErrorMessage('Tidak ada respons dari server. Periksa koneksi Anda.');
+      } else {
+        // Kesalahan lain
+        setErrorMessage('Terjadi kesalahan saat mengirim permintaan.');
+      }
     }
   };
 
